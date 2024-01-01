@@ -1,0 +1,8 @@
+from extract_files import extract_files_by_commits_dataset
+from extract_pull_requests import extract_pull_requests_by_commits_dataset
+from extract_users import extract_users_by_commits_dataset
+
+repo_name = "CrashCumber/audio_vizual_information"
+extract_files_by_commits_dataset(repo_name)
+extract_pull_requests_by_commits_dataset(repo_name)
+extract_users_by_commits_dataset(repo_name)
