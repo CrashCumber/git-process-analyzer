@@ -2,13 +2,11 @@ import os
 
 from github import Auth, Github
 
-from logger import logger
-from parsers import extract_pull_request
+from parsers import CaseIdType, extract_pull_request
 from writer import write_dataset
 
 
 def extract_pull_requests_by_commits_dataset(repo_name: str):
-    logger.info("Start extract pulls by commits from %s", repo_name)
     g = Github(auth=Auth.Token(os.getenv("git_token", "")))
 
     repo = g.get_repo(repo_name)
@@ -56,4 +54,4 @@ def extract_pull_requests_by_commits_dataset(repo_name: str):
         "pull_request.reviews",
         "pull_request.files",
     ]
-    write_dataset(commits, fieldnames, "pulls_by_commits", repo_name)
+    write_dataset(commits, fieldnames, CaseIdType.pull_commit.value, repo_name)

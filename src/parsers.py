@@ -4,6 +4,7 @@ from typing import Optional
 from github.Commit import Commit
 from github.CommitComment import CommitComment
 from github.File import File
+from github.GitAuthor import GitAuthor
 from github.GitCommit import GitCommit
 from github.Label import Label
 from github.NamedUser import NamedUser
@@ -12,8 +13,10 @@ from github.PullRequestComment import PullRequestComment
 from github.PullRequestReview import PullRequestReview
 
 
-class DatasetType(enum.StrEnum):
-    ...
+class CaseIdType(enum.StrEnum):
+    user_commit = "user_commit"
+    pull_commit = "pull_request_commit"
+    file_commit = "file_commit"
 
 
 def extract_file(file: File) -> dict:
@@ -31,9 +34,16 @@ def extract_file(file: File) -> dict:
     }
 
 
-def extract_user(user: Optional[NamedUser]) -> dict:
+def extract_user(user: Optional[NamedUser] | Optional[GitAuthor]) -> dict:
     if user is None:
         return {}
+
+    if isinstance(user, GitAuthor):
+        return {
+            "user.name": user.name,
+            "user.email": user.email,
+            "user.date": user.date,
+        }
     return {
         "user.id": user.id,
         "user.name": user.name,

@@ -2,14 +2,11 @@ import os
 
 from github import Auth, Github
 
-from logger import logger
-from parsers import extract_file
+from parsers import CaseIdType, extract_file
 from writer import write_dataset
 
 
 def extract_files_by_commits_dataset(repo_name: str):
-    logger.info("Start extract files by commit from %s", repo_name)
-
     g = Github(auth=Auth.Token(os.getenv("git_token", "")))
     repo = g.get_repo(repo_name)
 
@@ -36,4 +33,4 @@ def extract_files_by_commits_dataset(repo_name: str):
         "file.blob_url",
         "file.patch",
     ]
-    write_dataset(commits, fieldnames, "files_by_commit", repo_name)
+    write_dataset(commits, fieldnames, CaseIdType.file_commit.value, repo_name)

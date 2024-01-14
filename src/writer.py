@@ -1,10 +1,10 @@
 import csv
-import logging
 import time
 from pathlib import Path
 
+from logger import logger
 
-# enum to do
+
 def write_dataset(
     data_raw: dict | list, fieldnames: list, filename: str, repo_name: str
 ):
@@ -12,7 +12,7 @@ def write_dataset(
     dir_dataset.mkdir(exist_ok=True, parents=True)
 
     file_path = dir_dataset / f"{filename}_{int(time.time())}.csv"
-    logging.info("Write dataset in file %s", file_path)
+    logger.info("Write dataset in file %s", file_path)
 
     if isinstance(data_raw, dict):
         data = data_raw.values()
