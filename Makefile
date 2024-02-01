@@ -16,5 +16,8 @@ install:
 	pip install --upgrade pip
 	pip install -r requirements.txt
 
-run:
+run_d:
 	python3.11 src/main.py &
+
+run:
+	python3.11 src/main.py

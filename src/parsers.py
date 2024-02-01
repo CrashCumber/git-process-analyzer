@@ -44,15 +44,39 @@ def extract_user(user: Optional[NamedUser] | Optional[GitAuthor]) -> dict:
             "user.email": user.email,
             "user.date": user.date,
         }
+
     return {
         "user.id": user.id,
         "user.name": user.name,
-        "user.email": user.email,
+        # "user.email": user.email,
         "user.login": user.login,
         "user.type": user.type,
         "user.role": user.role,
         "user.company": user.company,
     }
+
+
+def extract_author(commit: Commit) -> dict:
+    if commit.author is None or commit.commit.author is None:
+        return {}
+    return {
+        "user.id": commit.author.id,
+        "user.type": commit.author.type,
+        "user.name": commit.commit.author.name,
+        "user.date": commit.commit.author.date,
+    }
+
+
+def extract_base_user(user: Optional[NamedUser], git_user: Optional[GitAuthor]) -> dict:
+    data = {}
+    if user is not None:
+        data["user.id"] = user.id
+        data["user.type"] = user.type
+
+    if git_user is not None:
+        data["user.name"] = git_user.name
+        data["user.date"] = git_user.date
+    return data
 
 
 def extract_git_commit(commit: GitCommit) -> dict:

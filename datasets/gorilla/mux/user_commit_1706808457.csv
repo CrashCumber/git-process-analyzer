@@ -1,0 +1,224 @@
+commit.sha,event_type,datetime,user.id,user.login,user.type,commit.stats.additions,commit.stats.deletions,commit.stats.total,commit.commit.message
+d033abe4a66f2728c35886278148b0e38e7dbe4f,create_commit,2023-08-23 01:41:23+00:00,5060301,coreydaley,,12,0,12,"Create .golangci.yaml
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>"
+d033abe4a66f2728c35886278148b0e38e7dbe4f,commit_commit,2023-08-23 01:41:23+00:00,19864447,web-flow,,12,0,12,"Create .golangci.yaml
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>"
+85123bf20e069b156415b871dea10517f6a8938a,create_commit,2023-08-17 15:29:52+00:00,93247057,sumanpaikdev,,2,1,3,"changed the routeVariables text content. (#708)
+
+Before changing the context there is a blind spot, and for this reason,
+decided to add a line break.
+
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+85123bf20e069b156415b871dea10517f6a8938a,commit_commit,2023-08-17 15:29:52+00:00,19864447,web-flow,,2,1,3,"changed the routeVariables text content. (#708)
+
+Before changing the context there is a blind spot, and for this reason,
+decided to add a line break.
+
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+edda2d6708ad91f8b3e78f59cd142eff6eed6c78,merge_pull_request,2023-08-17 15:29:53+00:00,5060301,coreydaley,,2,1,3,"changed the routeVariables text content.
+
+Before changing the context there is a blind spot, and for this reason, decided to add a line break."
+edda2d6708ad91f8b3e78f59cd142eff6eed6c78,create_pull_request,2022-12-09 05:40:27+00:00,93247057,sumanpaikdev,,2,1,3,"changed the routeVariables text content.
+
+Before changing the context there is a blind spot, and for this reason, decided to add a line break."
+1bb6a8c8bb138ea5b6dc40c7083e51fac64eb900,merge_pull_request,2023-08-17 15:29:53+00:00,5060301,coreydaley,,361,212,573,Merge branch 'main' into patch-1
+1bb6a8c8bb138ea5b6dc40c7083e51fac64eb900,create_pull_request,2022-12-09 05:40:27+00:00,93247057,sumanpaikdev,,361,212,573,Merge branch 'main' into patch-1
+85123bf20e069b156415b871dea10517f6a8938a,merge_pull_request,2023-08-17 15:29:53+00:00,5060301,coreydaley,,2,1,3,"changed the routeVariables text content. (#708)
+
+Before changing the context there is a blind spot, and for this reason,
+decided to add a line break.
+
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+1bb6a8c8bb138ea5b6dc40c7083e51fac64eb900,add_pull_request_review,2023-08-17 15:23:21+00:00,5060301,coreydaley,,361,212,573,Merge branch 'main' into patch-1
+79f2f457ca5017e08de9f86ada03939a82dbf714,create_commit,2023-08-17 04:48:59+00:00,8261769,andrew-werdna,,7,7,14,"Clarify documentation examples of Route methods (#672)
+
+Fixes #666 
+
+**Summary of Changes**
+
+1. Update `Route` method documentation comments where the example in the
+comments showed a `Router` before. Updated method names include:
+    * `Headers`
+    * `HeadersRegexp`
+    * `Host`
+    * `Path`
+    * `Queries`
+    * `Subrouter`
+    * `URL`
+
+Notes:
+* This includes what PR #667 did plus some changes requested by a
+maintainer in the comments
+* I was a little torn about changing the example in `Subrouter` since
+`(*Router).Host()` (like several `(*Router)` methods) just calls
+`(*Router).NewRoute().Host()` so I understand if maintainers are
+ambivalent about that example or want it to remain the same.
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>
+Co-authored-by: Andrew Brown <andrew.brown@logicmonitor.com>
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+79f2f457ca5017e08de9f86ada03939a82dbf714,commit_commit,2023-08-17 04:48:59+00:00,19864447,web-flow,,7,7,14,"Clarify documentation examples of Route methods (#672)
+
+Fixes #666 
+
+**Summary of Changes**
+
+1. Update `Route` method documentation comments where the example in the
+comments showed a `Router` before. Updated method names include:
+    * `Headers`
+    * `HeadersRegexp`
+    * `Host`
+    * `Path`
+    * `Queries`
+    * `Subrouter`
+    * `URL`
+
+Notes:
+* This includes what PR #667 did plus some changes requested by a
+maintainer in the comments
+* I was a little torn about changing the example in `Subrouter` since
+`(*Router).Host()` (like several `(*Router)` methods) just calls
+`(*Router).NewRoute().Host()` so I understand if maintainers are
+ambivalent about that example or want it to remain the same.
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>
+Co-authored-by: Andrew Brown <andrew.brown@logicmonitor.com>
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+24763f8ce525f596e7fe27281890ce2f8f3847a6,is_assigned_pull_request_to,2022-03-26 22:03:47+00:00,5060301,coreydaley,,7,7,14,"update documentation comments to show intended actions of a 'Route', in examples where a 'Router' was used;"
+24763f8ce525f596e7fe27281890ce2f8f3847a6,is_assigned_pull_request_to,2022-03-26 22:03:47+00:00,35304110,apoorvajagtap,,7,7,14,"update documentation comments to show intended actions of a 'Route', in examples where a 'Router' was used;"
+24763f8ce525f596e7fe27281890ce2f8f3847a6,merge_pull_request,2023-08-17 04:48:59+00:00,5060301,coreydaley,,7,7,14,"update documentation comments to show intended actions of a 'Route', in examples where a 'Router' was used;"
+24763f8ce525f596e7fe27281890ce2f8f3847a6,create_pull_request,2022-03-26 22:03:47+00:00,8261769,andrew-werdna,,7,7,14,"update documentation comments to show intended actions of a 'Route', in examples where a 'Router' was used;"
+8520951d91bb8fe85e34d650dc61844e8bb3a673,is_assigned_pull_request_to,2022-03-26 22:03:47+00:00,5060301,coreydaley,,306,205,511,"Merge branch 'main' into issue/666
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>"
+8520951d91bb8fe85e34d650dc61844e8bb3a673,is_assigned_pull_request_to,2022-03-26 22:03:47+00:00,35304110,apoorvajagtap,,306,205,511,"Merge branch 'main' into issue/666
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>"
+8520951d91bb8fe85e34d650dc61844e8bb3a673,merge_pull_request,2023-08-17 04:48:59+00:00,5060301,coreydaley,,306,205,511,"Merge branch 'main' into issue/666
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>"
+8520951d91bb8fe85e34d650dc61844e8bb3a673,create_pull_request,2022-03-26 22:03:47+00:00,8261769,andrew-werdna,,306,205,511,"Merge branch 'main' into issue/666
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>"
+d94561dfa35c0916856ec8e19898adf93d8e9d2e,is_assigned_pull_request_to,2022-03-26 22:03:47+00:00,5060301,coreydaley,,3,12,15,Merge branch 'main' into issue/666
+d94561dfa35c0916856ec8e19898adf93d8e9d2e,is_assigned_pull_request_to,2022-03-26 22:03:47+00:00,35304110,apoorvajagtap,,3,12,15,Merge branch 'main' into issue/666
+d94561dfa35c0916856ec8e19898adf93d8e9d2e,merge_pull_request,2023-08-17 04:48:59+00:00,5060301,coreydaley,,3,12,15,Merge branch 'main' into issue/666
+d94561dfa35c0916856ec8e19898adf93d8e9d2e,create_pull_request,2022-03-26 22:03:47+00:00,8261769,andrew-werdna,,3,12,15,Merge branch 'main' into issue/666
+79f2f457ca5017e08de9f86ada03939a82dbf714,merge_pull_request,2023-08-17 04:48:59+00:00,5060301,coreydaley,,7,7,14,"Clarify documentation examples of Route methods (#672)
+
+Fixes #666 
+
+**Summary of Changes**
+
+1. Update `Route` method documentation comments where the example in the
+comments showed a `Router` before. Updated method names include:
+    * `Headers`
+    * `HeadersRegexp`
+    * `Host`
+    * `Path`
+    * `Queries`
+    * `Subrouter`
+    * `URL`
+
+Notes:
+* This includes what PR #667 did plus some changes requested by a
+maintainer in the comments
+* I was a little torn about changing the example in `Subrouter` since
+`(*Router).Host()` (like several `(*Router)` methods) just calls
+`(*Router).NewRoute().Host()` so I understand if maintainers are
+ambivalent about that example or want it to remain the same.
+
+Signed-off-by: Corey Daley <cdaley@redhat.com>
+Co-authored-by: Andrew Brown <andrew.brown@logicmonitor.com>
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+24763f8ce525f596e7fe27281890ce2f8f3847a6,add_pull_request_review,2022-06-24 20:06:59+00:00,21127788,amustaque97,,7,7,14,"update documentation comments to show intended actions of a 'Route', in examples where a 'Router' was used;"
+d94561dfa35c0916856ec8e19898adf93d8e9d2e,add_pull_request_review,2023-08-16 02:01:10+00:00,5060301,coreydaley,,3,12,15,Merge branch 'main' into issue/666
+d94561dfa35c0916856ec8e19898adf93d8e9d2e,add_pull_request_review,2023-08-16 22:53:13+00:00,2231462,jackgris,,3,12,15,Merge branch 'main' into issue/666
+d94561dfa35c0916856ec8e19898adf93d8e9d2e,add_pull_request_review,2023-08-17 04:48:58+00:00,35304110,apoorvajagtap,,3,12,15,Merge branch 'main' into issue/666
+395ad81d0ebffa0c5a36f3e5a2e720a7d5870d92,create_commit,2023-08-17 01:34:43+00:00,17524113,soheilrt,,57,0,57,"[BUG] Inconsistent HTTP status code on query mismatch (#712)
+
+The logical behavior of a router should return an HTTP status code of
+404 when a request fails to satisfy route validation logic. Previously,
+MUX was returning a 405 HTTP status code in some rare scenarios, which
+was not valid in its case.
+
+For more info, See: https://github.com/gorilla/mux/issues/704
+
+Fixes #704 
+
+**Summary of Changes**
+
+1. Clear the mismatch error of the previous validations on method match.
+2. Added related tests
+
+> PS: Make sure your PR includes/updates tests! If you need help with
+this part, just ask!
+
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+395ad81d0ebffa0c5a36f3e5a2e720a7d5870d92,commit_commit,2023-08-17 01:34:43+00:00,19864447,web-flow,,57,0,57,"[BUG] Inconsistent HTTP status code on query mismatch (#712)
+
+The logical behavior of a router should return an HTTP status code of
+404 when a request fails to satisfy route validation logic. Previously,
+MUX was returning a 405 HTTP status code in some rare scenarios, which
+was not valid in its case.
+
+For more info, See: https://github.com/gorilla/mux/issues/704
+
+Fixes #704 
+
+**Summary of Changes**
+
+1. Clear the mismatch error of the previous validations on method match.
+2. Added related tests
+
+> PS: Make sure your PR includes/updates tests! If you need help with
+this part, just ask!
+
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+99de2a55d428c26f06dc7ef24dff8826b1e47860,is_assigned_pull_request_to,2023-07-14 17:58:45+00:00,5060301,coreydaley,,57,0,57,"[BUG] Inconsistent HTTP status code on query mismatch
+
+The logical behavour of a router should return http status code of 404 when a request fails to stisfy a route validation logics. Before this, mux was returning 405 http status code in some rare scenarios which is not a valid on its case.
+
+For more info, See: https://github.com/gorilla/mux/issues/704"
+99de2a55d428c26f06dc7ef24dff8826b1e47860,merge_pull_request,2023-08-17 01:34:43+00:00,5060301,coreydaley,,57,0,57,"[BUG] Inconsistent HTTP status code on query mismatch
+
+The logical behavour of a router should return http status code of 404 when a request fails to stisfy a route validation logics. Before this, mux was returning 405 http status code in some rare scenarios which is not a valid on its case.
+
+For more info, See: https://github.com/gorilla/mux/issues/704"
+99de2a55d428c26f06dc7ef24dff8826b1e47860,create_pull_request,2023-07-14 17:58:45+00:00,17524113,soheilrt,,57,0,57,"[BUG] Inconsistent HTTP status code on query mismatch
+
+The logical behavour of a router should return http status code of 404 when a request fails to stisfy a route validation logics. Before this, mux was returning 405 http status code in some rare scenarios which is not a valid on its case.
+
+For more info, See: https://github.com/gorilla/mux/issues/704"
+5029f9beb2cd7191ecebb2f4d9877698d12c5818,is_assigned_pull_request_to,2023-07-14 17:58:45+00:00,5060301,coreydaley,,282,180,462,Merge branch 'main' into main
+5029f9beb2cd7191ecebb2f4d9877698d12c5818,merge_pull_request,2023-08-17 01:34:43+00:00,5060301,coreydaley,,282,180,462,Merge branch 'main' into main
+5029f9beb2cd7191ecebb2f4d9877698d12c5818,create_pull_request,2023-07-14 17:58:45+00:00,17524113,soheilrt,,282,180,462,Merge branch 'main' into main
+74ea25369e81f326cdff0ab710cff289fe861b6b,is_assigned_pull_request_to,2023-07-14 17:58:45+00:00,5060301,coreydaley,,19,20,39,Merge branch 'main' into main
+74ea25369e81f326cdff0ab710cff289fe861b6b,merge_pull_request,2023-08-17 01:34:43+00:00,5060301,coreydaley,,19,20,39,Merge branch 'main' into main
+74ea25369e81f326cdff0ab710cff289fe861b6b,create_pull_request,2023-07-14 17:58:45+00:00,17524113,soheilrt,,19,20,39,Merge branch 'main' into main
+f0c4f4fd9887868775d7eda4a5c6a3ccacc76f58,is_assigned_pull_request_to,2023-07-14 17:58:45+00:00,5060301,coreydaley,,3,12,15,Merge branch 'main' into main
+f0c4f4fd9887868775d7eda4a5c6a3ccacc76f58,merge_pull_request,2023-08-17 01:34:43+00:00,5060301,coreydaley,,3,12,15,Merge branch 'main' into main
+f0c4f4fd9887868775d7eda4a5c6a3ccacc76f58,create_pull_request,2023-07-14 17:58:45+00:00,17524113,soheilrt,,3,12,15,Merge branch 'main' into main
+395ad81d0ebffa0c5a36f3e5a2e720a7d5870d92,merge_pull_request,2023-08-17 01:34:43+00:00,5060301,coreydaley,,57,0,57,"[BUG] Inconsistent HTTP status code on query mismatch (#712)
+
+The logical behavior of a router should return an HTTP status code of
+404 when a request fails to satisfy route validation logic. Previously,
+MUX was returning a 405 HTTP status code in some rare scenarios, which
+was not valid in its case.
+
+For more info, See: https://github.com/gorilla/mux/issues/704
+
+Fixes #704 
+
+**Summary of Changes**
+
+1. Clear the mismatch error of the previous validations on method match.
+2. Added related tests
+
+> PS: Make sure your PR includes/updates tests! If you need help with
+this part, just ask!
+
+Co-authored-by: Corey Daley <cdaley@redhat.com>"
+f0c4f4fd9887868775d7eda4a5c6a3ccacc76f58,add_pull_request_review,2023-08-17 01:34:42+00:00,5060301,coreydaley,,3,12,15,Merge branch 'main' into main
