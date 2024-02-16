@@ -3,13 +3,7 @@ import os
 
 from github import Auth, Github
 
-from parsers import (
-    extract_comment,
-    extract_commit,
-    extract_file,
-    extract_git_commit,
-    extract_pull_request,
-)
+from parsers import extract_comment, extract_commit, extract_file, extract_git_commit, extract_pull_request
 from writer import write_dataset
 
 
@@ -106,33 +100,3 @@ class CommitEventType(enum.StrEnum):
     add_pull_request_review = "add_pull_request_review"
     create_release = "create_release"
     publish_release = "publish_release"
-
-
-def extract_commits_dataset(repo_name: str):
-    g = Github(auth=Auth.Token(os.getenv("git_token", "")))
-
-    repo = g.get_repo(repo_name)
-    branches = repo.get_branches()
-    tags = repo.get_tags()
-    tag_release_map = {}
-
-    commits = set()
-
-    for branch in branches:
-        for commit in repo.get_commits(sha=branch.name):
-            if commit.sha in commits:
-                continue
-
-            files = [extract_file(file) for file in commit.files]
-            pull_requests = [extract_pull_request(pull) for pull in commit.get_pulls()]
-            comments = [extract_comment(comment) for comment in commit.get_comments()]
-            # commits[commit.sha] = {
-            #     **extract_git_commit(commit.commit),
-            #     **extract_commit(commit),
-            #     "commit.branches": [branch.name],
-            #     "commit.tags": [],
-            #     "commit.release": [],
-            #     "commit.pull_requests": pull_requests,
-            #     "commit.files": files,
-            #     "commit.comments": comments,
-            # }

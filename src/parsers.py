@@ -1,6 +1,6 @@
-import enum
 from typing import Optional
 
+from attrs.exceptions import NotAnAttrsClassError
 from github.Commit import Commit
 from github.CommitComment import CommitComment
 from github.File import File
@@ -13,10 +13,28 @@ from github.PullRequestComment import PullRequestComment
 from github.PullRequestReview import PullRequestReview
 
 
-class CaseIdType(enum.StrEnum):
-    user_commit = "user_commit"
-    pull_commit = "pull_request_commit"
-    file_commit = "file_commit"
+class Counter:
+    def __init__(self):
+        self._count = -1
+
+    def __call__(self):
+        self._count += 1
+        return self._count
+
+    @property
+    def count(self):
+        return self._count
+
+
+def model_fields(cls) -> tuple:
+    if not isinstance(cls, type):
+        msg = "Passed object must be a class."
+        raise TypeError(msg)
+    attrs = getattr(cls, "__attrs_attrs__", None)
+    if attrs is None:
+        msg = f"{cls!r} is not an attrs-decorated class."
+        raise NotAnAttrsClassError(msg)
+    return tuple(a.name for a in attrs)
 
 
 def extract_file(file: File) -> dict:
@@ -173,16 +191,9 @@ def extract_pull_request(pull_request: PullRequest) -> dict:
     https://api.github.com/repos/gorilla/mux/pulls/691
     https://api.github.com/repos/gorilla/mux/commits/e44017df2b8798f6bfff81fff1c0b319c1a54496/pulls
     """
-    comments = [
-        extract_pull_request_comment(comment) for comment in pull_request.get_comments()
-    ]
-    review_comments = [
-        extract_pull_request_comment(comment)
-        for comment in pull_request.get_review_comments()
-    ]
-    reviews = [
-        extract_pull_request_review(review) for review in pull_request.get_reviews()
-    ]
+    comments = [extract_pull_request_comment(comment) for comment in pull_request.get_comments()]
+    review_comments = [extract_pull_request_comment(comment) for comment in pull_request.get_review_comments()]
+    reviews = [extract_pull_request_review(review) for review in pull_request.get_reviews()]
     labels = [extract_label(label) for label in pull_request.get_labels()]
     requested_review = [extract_user(user) for user in pull_request.requested_reviewers]
     assignees = [extract_user(user) for user in pull_request.assignees]
