@@ -20,7 +20,7 @@ from parsers import Counter, model_fields
 from writer import prepare_file
 
 
-def extract_commits(repo_name: str, commits_number=None, branch=None):
+def extract_commits(repo_name: str, branch=None, commits_cnt=None, tag_cnt=None):
     commit_file, commit_writer = prepare_file(model_fields(CommitRow), str(CaseIdType.commits), repo_name)
     file_file, file_writer = prepare_file(model_fields(FileRow), str(CaseIdType.file_commit), repo_name)
     user_file, user_writer = prepare_file(model_fields(UserRow), str(CaseIdType.user_commit), repo_name)
@@ -35,7 +35,9 @@ def extract_commits(repo_name: str, commits_number=None, branch=None):
     g = Github(auth=Auth.Token(os.getenv("git_token", "")))
     parsed_commit = set()
     parsed_pr = set()
-    counter = Counter()
+
+    commit_counter = Counter()
+    tag_counter = Counter()
     try:
         repo = g.get_repo(repo_name)
 
@@ -46,6 +48,9 @@ def extract_commits(repo_name: str, commits_number=None, branch=None):
 
         tags = repo.get_tags()
         for tag in tags:
+            if tag_cnt is not None and tag_counter.count >= tag_cnt:
+                break
+            tag_counter()
             t_writer.writerow(asdict(TagRow.from_dict(tag)))
             r = repo.get_release(tag.name)
             r_writer.writerow(asdict(ReleaseRow.from_dict(tag.commit.sha, r)))
@@ -54,10 +59,10 @@ def extract_commits(repo_name: str, commits_number=None, branch=None):
             for commit in repo.get_commits(sha=branch.name):
                 if commit.sha in parsed_commit:
                     continue
-                if commits_number is not None and counter.count >= commits_number:
+                if commits_cnt is not None and commit_counter.count >= commits_cnt:
                     break
                 parsed_commit.add(commit.sha)
-                counter()
+                commit_counter()
 
                 commit_writer.writerow(asdict(CommitRow.from_dict(commit)))
                 user_writer.writerow(

@@ -15,7 +15,7 @@ from github.PullRequestReview import PullRequestReview
 
 class Counter:
     def __init__(self):
-        self._count = -1
+        self._count = 0
 
     def __call__(self):
         self._count += 1

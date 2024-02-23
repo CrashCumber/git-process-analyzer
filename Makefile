@@ -17,7 +17,7 @@ install:
 	pip install -r requirements.txt
 
 run_d:
-	python3.11 src/main.py &
+	python3.11 src/main.py -r mux -a gorilla -c 10 -t 0 &
 
 run:
-	python3.11 src/main.py
+	python3.11 src/main.py -r mux -a gorilla -c 10 -t 0
