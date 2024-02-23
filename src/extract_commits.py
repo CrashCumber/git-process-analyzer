@@ -3,7 +3,8 @@ import os
 
 from github import Auth, Github
 
-from parsers import extract_comment, extract_commit, extract_file, extract_git_commit, extract_pull_request
+from parsers import (extract_comment, extract_commit, extract_file,
+                     extract_git_commit, extract_pull_request)
 from writer import write_dataset
 
 

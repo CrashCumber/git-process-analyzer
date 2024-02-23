@@ -133,7 +133,9 @@ class UserRow:
     followers: int = field(default=None)
 
     @classmethod
-    def from_dict(cls, commit_sha: str, actor: str, user: NamedUser, git_user: GitAuthor):
+    def from_dict(
+        cls, commit_sha: str, actor: str, user: NamedUser, git_user: GitAuthor
+    ):
         row = {
             "commit_sha": commit_sha,
             "actor": actor,

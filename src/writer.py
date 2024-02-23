@@ -6,7 +6,9 @@ from pathlib import Path
 from logger import logger
 
 
-def write_dataset(data_raw: dict | list, fieldnames: list, filename: str, repo_name: str):
+def write_dataset(
+    data_raw: dict | list, fieldnames: list, filename: str, repo_name: str
+):
     dir_dataset = Path().absolute() / "datasets" / repo_name
     dir_dataset.mkdir(exist_ok=True, parents=True)
 
@@ -25,7 +27,9 @@ def write_dataset(data_raw: dict | list, fieldnames: list, filename: str, repo_n
             writer.writerow(row)
 
 
-def prepare_file(fieldnames: list | tuple, filename: str, repo_name: str) -> tuple[TextIOWrapper, csv.DictWriter]:
+def prepare_file(
+    fieldnames: list | tuple, filename: str, repo_name: str
+) -> tuple[TextIOWrapper, csv.DictWriter]:
     timestamp = str(int(time.time()))
     dir_dataset = Path().absolute() / "datasets" / repo_name / timestamp
     dir_dataset.mkdir(exist_ok=True, parents=True)

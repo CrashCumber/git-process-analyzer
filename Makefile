@@ -9,6 +9,10 @@ clean:
 	find . -name "*.pyc" -exec rm {} \;
 	find . -name "*.log" -exec rm {} \;
 
+format:
+	black src/*
+	isort src/*
+
 venv:
 	python3.11 -m venv venv
 

@@ -4,33 +4,40 @@ from attrs import asdict
 from github import Auth, Github
 
 from logger import logger
-from models import (
-    CaseIdType,
-    CommentRow,
-    CommitRow,
-    FileRow,
-    PullRequestCommentRow,
-    PullRequestRow,
-    ReleaseRow,
-    TagRow,
-    UserEventType,
-    UserRow,
-)
+from models import (CaseIdType, CommentRow, CommitRow, FileRow,
+                    PullRequestCommentRow, PullRequestRow, ReleaseRow, TagRow,
+                    UserEventType, UserRow)
 from parsers import Counter, model_fields
 from writer import prepare_file
 
 
 def extract_commits(repo_name: str, branch=None, commits_cnt=None, tag_cnt=None):
-    commit_file, commit_writer = prepare_file(model_fields(CommitRow), str(CaseIdType.commits), repo_name)
-    file_file, file_writer = prepare_file(model_fields(FileRow), str(CaseIdType.file_commit), repo_name)
-    user_file, user_writer = prepare_file(model_fields(UserRow), str(CaseIdType.user_commit), repo_name)
-    pr_file, pr_writer = prepare_file(model_fields(PullRequestRow), str(CaseIdType.pull_commit), repo_name)
-    prc_file, prc_writer = prepare_file(
-        model_fields(PullRequestCommentRow), str(CaseIdType.pull_comment_commit), repo_name
+    commit_file, commit_writer = prepare_file(
+        model_fields(CommitRow), str(CaseIdType.commits), repo_name
     )
-    c_file, c_writer = prepare_file(model_fields(CommentRow), str(CaseIdType.comment_commit), repo_name)
-    t_file, t_writer = prepare_file(model_fields(TagRow), str(CaseIdType.tag_commit), repo_name)
-    r_file, r_writer = prepare_file(model_fields(ReleaseRow), str(CaseIdType.release_commit), repo_name)
+    file_file, file_writer = prepare_file(
+        model_fields(FileRow), str(CaseIdType.file_commit), repo_name
+    )
+    user_file, user_writer = prepare_file(
+        model_fields(UserRow), str(CaseIdType.user_commit), repo_name
+    )
+    pr_file, pr_writer = prepare_file(
+        model_fields(PullRequestRow), str(CaseIdType.pull_commit), repo_name
+    )
+    prc_file, prc_writer = prepare_file(
+        model_fields(PullRequestCommentRow),
+        str(CaseIdType.pull_comment_commit),
+        repo_name,
+    )
+    c_file, c_writer = prepare_file(
+        model_fields(CommentRow), str(CaseIdType.comment_commit), repo_name
+    )
+    t_file, t_writer = prepare_file(
+        model_fields(TagRow), str(CaseIdType.tag_commit), repo_name
+    )
+    r_file, r_writer = prepare_file(
+        model_fields(ReleaseRow), str(CaseIdType.release_commit), repo_name
+    )
 
     g = Github(auth=Auth.Token(os.getenv("git_token", "")))
     parsed_commit = set()
@@ -68,14 +75,20 @@ def extract_commits(repo_name: str, branch=None, commits_cnt=None, tag_cnt=None)
                 user_writer.writerow(
                     asdict(
                         UserRow.from_dict(
-                            commit.sha, str(UserEventType.create_commit), commit.author, commit.commit.author
+                            commit.sha,
+                            str(UserEventType.create_commit),
+                            commit.author,
+                            commit.commit.author,
                         )
                     )
                 )
                 user_writer.writerow(
                     asdict(
                         UserRow.from_dict(
-                            commit.sha, str(UserEventType.commit_commit), commit.committer, commit.commit.committer
+                            commit.sha,
+                            str(UserEventType.commit_commit),
+                            commit.committer,
+                            commit.commit.committer,
                         )
                     )
                 )
@@ -89,7 +102,9 @@ def extract_commits(repo_name: str, branch=None, commits_cnt=None, tag_cnt=None)
                     pr_writer.writerow(asdict(PullRequestRow.from_dict(commit.sha, p)))
 
                     for p in p.get_comments():
-                        prc_writer.writerow(asdict(PullRequestCommentRow.from_dict(commit.sha, p)))
+                        prc_writer.writerow(
+                            asdict(PullRequestCommentRow.from_dict(commit.sha, p))
+                        )
 
                 for p in commit.get_comments():
                     c_writer.writerow(asdict(CommentRow.from_dict(commit.sha, p)))
