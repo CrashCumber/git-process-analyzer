@@ -4,9 +4,7 @@ from extract_commit_model import extract_commits
 from logger import logger
 
 parser = argparse.ArgumentParser(description="Extract dataset for commit model")
-parser.add_argument(
-    "--repo", "-r", dest="repo", required=True, help="name of github repository"
-)
+parser.add_argument("--repo", "-r", dest="repo", required=True, help="name of github repository")
 parser.add_argument(
     "--author",
     "-a",
@@ -21,13 +19,15 @@ parser.add_argument(
     type=int,
     help="number of commits for extractions",
 )
-parser.add_argument(
-    "--tags", "-t", dest="tags", type=int, help="number of tags for extractions"
-)
+parser.add_argument("--tags", "-t", dest="tags", type=int, help="number of tags for extractions")
+parser.add_argument("--branch", "-b", dest="branch", type=str, help="branch for extraction")
+parser.add_argument("--all-branch", "-ab", dest="all_branch", type=bool, help="extract all branch")
 
 if __name__ == "__main__":
     args = parser.parse_args()
     logger.info("Start extract from %s", args)
     repo_name = args.author + "/" + args.repo
-    extract_commits(repo_name, commits_cnt=args.commits, tag_cnt=args.tags)
+    extract_commits(
+        repo_name, branch=args.branch, all_branch=args.all_branch, commits_cnt=args.commits, tag_cnt=args.tags
+    )
     logger.info("Finish extract from %s", args)

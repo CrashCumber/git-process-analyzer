@@ -3,12 +3,12 @@ import time
 from io import TextIOWrapper
 from pathlib import Path
 
+from attrs import asdict
+
 from logger import logger
 
 
-def write_dataset(
-    data_raw: dict | list, fieldnames: list, filename: str, repo_name: str
-):
+def write_dataset(data_raw: dict | list, fieldnames: list, filename: str, repo_name: str):
     dir_dataset = Path().absolute() / "datasets" / repo_name
     dir_dataset.mkdir(exist_ok=True, parents=True)
 
@@ -27,9 +27,16 @@ def write_dataset(
             writer.writerow(row)
 
 
-def prepare_file(
-    fieldnames: list | tuple, filename: str, repo_name: str
-) -> tuple[TextIOWrapper, csv.DictWriter]:
+class DataSetWriter(csv.DictWriter):
+    def writeheader(self):
+        header = dict(zip(self.fieldnames, self.fieldnames))
+        return super().writerow(header)
+
+    def writerow(self, row):
+        return super().writerow(asdict(row))
+
+
+def prepare_file(fieldnames: list | tuple, filename: str, repo_name: str) -> tuple[TextIOWrapper, DataSetWriter]:
     timestamp = str(int(time.time()))
     dir_dataset = Path().absolute() / "datasets" / repo_name / timestamp
     dir_dataset.mkdir(exist_ok=True, parents=True)
@@ -37,6 +44,6 @@ def prepare_file(
     file_path = dir_dataset / f"{filename}.csv"
     logger.info("Write dataset in file %s", file_path)
     file_dataset = open(file_path, "w", newline="")
-    writer = csv.DictWriter(file_dataset, fieldnames=fieldnames)
+    writer = DataSetWriter(file_dataset, fieldnames=fieldnames)
     writer.writeheader()
     return file_dataset, writer

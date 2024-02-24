@@ -1,113 +1,165 @@
 import os
 
-from attrs import asdict
 from github import Auth, Github
 
 from logger import logger
-from models import (CaseIdType, CommentRow, CommitRow, FileRow,
-                    PullRequestCommentRow, PullRequestRow, ReleaseRow, TagRow,
-                    UserEventType, UserRow)
+from models import (
+    CaseIdType,
+    CommentRow,
+    CommitRow,
+    FileRow,
+    PullRequestCommentRow,
+    PullRequestRow,
+    ReleaseRow,
+    TagRow,
+    UserEventType,
+    UserRow,
+)
 from parsers import Counter, model_fields
 from writer import prepare_file
 
 
-def extract_commits(repo_name: str, branch=None, commits_cnt=None, tag_cnt=None):
-    commit_file, commit_writer = prepare_file(
-        model_fields(CommitRow), str(CaseIdType.commits), repo_name
-    )
-    file_file, file_writer = prepare_file(
-        model_fields(FileRow), str(CaseIdType.file_commit), repo_name
-    )
-    user_file, user_writer = prepare_file(
-        model_fields(UserRow), str(CaseIdType.user_commit), repo_name
-    )
-    pr_file, pr_writer = prepare_file(
-        model_fields(PullRequestRow), str(CaseIdType.pull_commit), repo_name
-    )
-    prc_file, prc_writer = prepare_file(
+def extract_commits(repo_name: str, all_branch=False, branch=None, commits_cnt=None, tag_cnt=None):
+    commit_file, commit_writer = prepare_file(model_fields(CommitRow), str(CaseIdType.commits), repo_name)
+    file_file, file_writer = prepare_file(model_fields(FileRow), str(CaseIdType.file_commit), repo_name)
+    user_file, user_writer = prepare_file(model_fields(UserRow), str(CaseIdType.user_commit), repo_name)
+    pr_file, pr_writer = prepare_file(model_fields(PullRequestRow), str(CaseIdType.pull_commit), repo_name)
+    prc_file, prcomment_writer = prepare_file(
         model_fields(PullRequestCommentRow),
         str(CaseIdType.pull_comment_commit),
         repo_name,
     )
-    c_file, c_writer = prepare_file(
-        model_fields(CommentRow), str(CaseIdType.comment_commit), repo_name
-    )
-    t_file, t_writer = prepare_file(
-        model_fields(TagRow), str(CaseIdType.tag_commit), repo_name
-    )
-    r_file, r_writer = prepare_file(
-        model_fields(ReleaseRow), str(CaseIdType.release_commit), repo_name
-    )
+    c_file, comment_writer = prepare_file(model_fields(CommentRow), str(CaseIdType.comment_commit), repo_name)
+    t_file, tag_writer = prepare_file(model_fields(TagRow), str(CaseIdType.tag_commit), repo_name)
+    r_file, release_writer = prepare_file(model_fields(ReleaseRow), str(CaseIdType.release_commit), repo_name)
 
     g = Github(auth=Auth.Token(os.getenv("git_token", "")))
     parsed_commit = set()
-    parsed_pr = set()
 
     commit_counter = Counter()
     tag_counter = Counter()
     try:
         repo = g.get_repo(repo_name)
 
-        if branch is None:
+        if not branch:
             branches = [repo.get_branch(repo.default_branch)]
-        else:
+        elif all_branch:
             branches = repo.get_branches()
+        else:
+            branches = [repo.get_branch(branch)]
 
         tags = repo.get_tags()
         for tag in tags:
+
             if tag_cnt is not None and tag_counter.count >= tag_cnt:
                 break
             tag_counter()
-            t_writer.writerow(asdict(TagRow.from_dict(tag)))
-            r = repo.get_release(tag.name)
-            r_writer.writerow(asdict(ReleaseRow.from_dict(tag.commit.sha, r)))
+            sha = tag.commit.sha
+            tag_writer.writerow(TagRow.from_dict(tag))
+
+            release = repo.get_release(tag.name)
+            release_writer.writerow(ReleaseRow.from_dict(sha, release))
+            user_writer.writerow(
+                UserRow.from_dict(
+                    sha,
+                    UserEventType.create_release,
+                    release.author,
+                    release.created_at,
+                )
+            )
 
         for branch in branches:
             for commit in repo.get_commits(sha=branch.name):
-                if commit.sha in parsed_commit:
+                sha = commit.sha
+                if sha in parsed_commit:
                     continue
                 if commits_cnt is not None and commit_counter.count >= commits_cnt:
                     break
-                parsed_commit.add(commit.sha)
+                parsed_commit.add(sha)
                 commit_counter()
 
-                commit_writer.writerow(asdict(CommitRow.from_dict(commit)))
+                commit_writer.writerow(CommitRow.from_dict(commit))
                 user_writer.writerow(
-                    asdict(
-                        UserRow.from_dict(
-                            commit.sha,
-                            str(UserEventType.create_commit),
-                            commit.author,
-                            commit.commit.author,
-                        )
+                    UserRow.from_dict(
+                        sha,
+                        UserEventType.create_commit,
+                        commit.author,
+                        commit.commit.author.date,
                     )
                 )
                 user_writer.writerow(
-                    asdict(
-                        UserRow.from_dict(
-                            commit.sha,
-                            str(UserEventType.commit_commit),
-                            commit.committer,
-                            commit.commit.committer,
-                        )
+                    UserRow.from_dict(
+                        sha,
+                        UserEventType.commit_commit,
+                        commit.committer,
+                        commit.commit.committer.date,
                     )
                 )
                 for f in commit.files:
-                    file_writer.writerow(asdict(FileRow.from_dict(commit.sha, f)))
+                    file_writer.writerow(FileRow.from_dict(sha, f))
 
-                for p in commit.get_pulls():
-                    if p.id in parsed_pr:
-                        continue
-                    parsed_pr.add(p.id)
-                    pr_writer.writerow(asdict(PullRequestRow.from_dict(commit.sha, p)))
+                for pull in commit.get_pulls():
+                    pr_writer.writerow(PullRequestRow.from_dict(sha, pull))
 
-                    for p in p.get_comments():
-                        prc_writer.writerow(
-                            asdict(PullRequestCommentRow.from_dict(commit.sha, p))
+                    user_writer.writerow(
+                        UserRow.from_dict(
+                            sha,
+                            UserEventType.create_pull_request,
+                            pull.user,
+                            pull.created_at,
+                        )
+                    )
+                    user_writer.writerow(
+                        UserRow.from_dict(
+                            sha,
+                            UserEventType.merge_pull_request,
+                            pull.merged_by,
+                            pull.merged_at,
+                        )
+                    )
+
+                    for pull_comment in pull.get_comments():
+                        if pull_comment.commit_id != sha:
+                            continue
+                        prcomment_writer.writerow(PullRequestCommentRow.from_dict(sha, pull_comment))
+                        user_writer.writerow(
+                            UserRow.from_dict(
+                                sha,
+                                UserEventType.comment_pull_request,
+                                pull_comment.user,
+                                pull_comment.created_at,
+                            )
                         )
 
-                for p in commit.get_comments():
-                    c_writer.writerow(asdict(CommentRow.from_dict(commit.sha, p)))
+                    for reviewer in pull.requested_reviewers:
+                        user_writer.writerow(
+                            UserRow.from_dict(
+                                sha,
+                                UserEventType.requested_review_from,
+                                reviewer,
+                                None,
+                            )
+                        )
+                    for assigne in pull.assignees:
+                        user_writer.writerow(
+                            UserRow.from_dict(
+                                sha,
+                                UserEventType.assigned_to,
+                                assigne,
+                                None,
+                            )
+                        )
+
+                for comment in commit.get_comments():
+                    comment_writer.writerow(CommentRow.from_dict(sha, comment))
+                    user_writer.writerow(
+                        UserRow.from_dict(
+                            sha,
+                            UserEventType.comment_commit,
+                            comment.user,
+                            comment.created_at,
+                        )
+                    )
 
         logger.info("Success extracted")
     except Exception as e:

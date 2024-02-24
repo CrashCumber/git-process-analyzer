@@ -191,16 +191,9 @@ def extract_pull_request(pull_request: PullRequest) -> dict:
     https://api.github.com/repos/gorilla/mux/pulls/691
     https://api.github.com/repos/gorilla/mux/commits/e44017df2b8798f6bfff81fff1c0b319c1a54496/pulls
     """
-    comments = [
-        extract_pull_request_comment(comment) for comment in pull_request.get_comments()
-    ]
-    review_comments = [
-        extract_pull_request_comment(comment)
-        for comment in pull_request.get_review_comments()
-    ]
-    reviews = [
-        extract_pull_request_review(review) for review in pull_request.get_reviews()
-    ]
+    comments = [extract_pull_request_comment(comment) for comment in pull_request.get_comments()]
+    review_comments = [extract_pull_request_comment(comment) for comment in pull_request.get_review_comments()]
+    reviews = [extract_pull_request_review(review) for review in pull_request.get_reviews()]
     labels = [extract_label(label) for label in pull_request.get_labels()]
     requested_review = [extract_user(user) for user in pull_request.requested_reviewers]
     assignees = [extract_user(user) for user in pull_request.assignees]

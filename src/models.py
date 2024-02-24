@@ -1,10 +1,10 @@
 import enum
+from datetime import datetime
 
 from attrs import define, field
 from github.Commit import Commit
 from github.CommitComment import CommitComment
 from github.File import File
-from github.GitAuthor import GitAuthor
 from github.GitRelease import GitRelease
 from github.NamedUser import NamedUser
 from github.PullRequest import PullRequest
@@ -25,13 +25,13 @@ class CaseIdType(enum.StrEnum):
 
 class UserEventType(enum.StrEnum):
     commit_commit = "commit_commit"
+    comment_commit = "comment"
     create_commit = "create_commit"
     create_pull_request = "create_pull_request"
-    is_assigned_pull_request_to = "is_assigned_pull_request_to"
-    is_requested_review_pull_request_from = "requested_review_from"
+    assigned_to = "assigned_to"
+    requested_review_from = "requested_review_from"
     merge_pull_request = "merge_pull_request"
-    add_pull_request_comment = "add_pull_request_comment"
-    add_pull_request_review = "add_pull_request_review"
+    comment_pull_request = "comment_pull_request"
     create_release = "create_release"
     publish_release = "publish_release"
 
@@ -118,8 +118,7 @@ class UserRow:
     login: str = field()
     email: str = field()
     url: str = field()
-    actor: str = field()
-    date: str = field()
+    event: str = field()
     followers_url: str = field()
     following_url: str = field()
     subscriptions_url: str = field()
@@ -129,17 +128,16 @@ class UserRow:
     site_admin: bool = field(converter=bool)
     type: str = field()
     company: str = field()
+    date: str = field(default=None)
     following: int = field(default=None)
     followers: int = field(default=None)
 
     @classmethod
-    def from_dict(
-        cls, commit_sha: str, actor: str, user: NamedUser, git_user: GitAuthor
-    ):
+    def from_dict(cls, commit_sha: str, event: UserEventType, user: NamedUser, date: datetime | None = None):
         row = {
             "commit_sha": commit_sha,
-            "actor": actor,
-            "date": git_user.date,
+            "event": event.value,
+            "date": date,
             "id": user.id,
             "url": user.url,
             "name": user.name,
