@@ -13,14 +13,14 @@ from github.Tag import Tag
 
 
 class CaseIdType(enum.StrEnum):
-    user_commit = "user_commit"
-    pull_commit = "pull_request_commit"
-    pull_comment_commit = "pull_request_comment_commit"
+    user_commit = "user-commit"
+    pull_commit = "pull_request-commit"
+    pull_comment_commit = "pull_request_comment-commit"
     file_commit = "file_commit"
-    comment_commit = "comment_commit"
+    comment_commit = "comment-commit"
     commits = "commits"
-    tag_commit = "tag_commit"
-    release_commit = "release_commit"
+    tag_commit = "tag-commit"
+    release_commit = "release-commit"
 
 
 class UserEventType(enum.StrEnum):
@@ -57,20 +57,39 @@ class CommitRow:
     def from_dict(cls, commit: Commit):
         row = {
             "sha": commit.sha,
-            "message": commit.commit.message,
-            "create_date": commit.commit.author.date,
-            "commit_date": commit.commit.committer.date,
-            "author_id": commit.author.id,
-            "committer_id": commit.committer.id,
-            "stats_additions": commit.stats.additions,
-            "stats_deletions": commit.stats.deletions,
-            "stats_total": commit.stats.total,
+            "message": "",
+            "create_date": "",
+            "commit_date": "",
+            "author_id": -1,
+            "committer_id": -1,
+            "stats_additions": -1,
+            "stats_deletions": -1,
+            "stats_total": -1,
             "tree_sha": commit.commit.tree.sha,
             "tree_url": commit.commit.tree.url,
             "comments_url": commit.comments_url,
             "url": commit.url,
             "html_url": commit.html_url,
         }
+        if commit.author:
+            row["author_id"] = commit.author.id
+        if commit.committer:
+            row["committer_id"] = commit.committer.id
+
+        if commit.commit.committer:
+            row["commit_date"] = commit.commit.committer.date
+        if commit.commit.author:
+            row["create_date"] = commit.commit.author.date
+        if commit.commit.message:
+            row["message"] = commit.commit.message
+        if commit.stats:
+            row.update(
+                {
+                    "stats_additions": commit.stats.additions,
+                    "stats_deletions": commit.stats.deletions,
+                    "stats_total": commit.stats.total,
+                }
+            )
 
         return cls(**row)
 

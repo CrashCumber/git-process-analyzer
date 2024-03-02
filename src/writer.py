@@ -36,9 +36,12 @@ class DataSetWriter(csv.DictWriter):
         return super().writerow(asdict(row))
 
 
-def prepare_file(fieldnames: list | tuple, filename: str, repo_name: str) -> tuple[TextIOWrapper, DataSetWriter]:
-    timestamp = str(int(time.time()))
-    dir_dataset = Path().absolute() / "datasets" / repo_name / timestamp
+def prepare_file(
+    fieldnames: list | tuple, filename: str, repo_name: str, timestamp, dir_dataset=None
+) -> tuple[TextIOWrapper, DataSetWriter]:
+    if not dir_dataset:
+        dir_dataset = Path().absolute() / "datasets" / repo_name / timestamp
+
     dir_dataset.mkdir(exist_ok=True, parents=True)
 
     file_path = dir_dataset / f"{filename}.csv"
