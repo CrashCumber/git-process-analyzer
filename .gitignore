@@ -1,0 +1,6 @@
+venv
+.ipynb_checkpoints
+.env
+*.log
+__pycache__
+.DS_Store

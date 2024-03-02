@@ -1,0 +1,377 @@
+commit_sha,body,id,created_at,updated_at
+f3ff42f93a451d7ffb2ff11cb9485f3f88089c83,This PR causes bugs in routers which have mux.Host() ,33329808,2019-04-26 23:25:52+00:00,2019-04-26 23:25:52+00:00
+f3ff42f93a451d7ffb2ff11cb9485f3f88089c83,"Can you please file a new issue - and fill in the issue template -
+describing the bug in full?
+
+On Sat, Apr 27, 2019 at 12:25 AM Harshavardhana <notifications@github.com>
+wrote:
+
+> This PR causes bugs in routers which have mux.Host()
+>
+> —
+> You are receiving this because you authored the thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gorilla/mux/commit/f3ff42f93a451d7ffb2ff11cb9485f3f88089c83#commitcomment-33329808>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AAAEQ4CYTX43KZYPXYHXH2TPSOFQDANCNFSM4HI242YA>
+> .
+>
+",33331197,2019-04-27 06:04:10+00:00,2019-04-27 06:04:10+00:00
+6137e193cdcba2725f16de84eaf0db2b769d9668,"I am getting this error, it may be relevant to your latest changes - if so, let me know what should I do to correct:
+![screenshot 2018-12-26 08 00 18](https://user-images.githubusercontent.com/46149869/50434807-7383dd00-08e7-11e9-8a82-2aa65d04201f.png)
+",31779201,2018-12-26 06:23:35+00:00,2018-12-26 06:23:35+00:00
+6137e193cdcba2725f16de84eaf0db2b769d9668,"Please raise a new issue using the issue template, @yvirtual",31781875,2018-12-26 14:19:44+00:00,2018-12-26 14:19:44+00:00
+5ab525f4fb1678e197ae59401e9050fa0b6cb5fd,"import ""github.com/gorilla/mux""
+func TestCreatePerson(t *testing.T) {
+
+    personJson := `{""Role"":1, ""Firstname"": ""Testy"", ""Lastname"": ""Tester"", ""Address"": {""City"": ""Seattle"", ""State"": ""WA"", ""Country"": ""USA""}}`
+
+    reader := strings.NewReader(personJson)
+
+    req, err := http.NewRequest(""POST"", ""/people"", reader)
+    if err != nil {
+        t.Fatal(err)
+    }
+
+    req = mux.SetURLVars(req, map[string]string{""id"":""3""})
+
+    rr := httptest.NewRecorder()
+    handler := http.HandlerFunc(CreatePersonHandler)
+    handler.ServeHTTP(rr, req)
+
+    if status := rr.Code; status != http.StatusOK {
+        t.Errorf(""handler returned wrong status code: got %v want %v"",
+            status, http.StatusOK)
+    }
+
+    if rr.Body.String() != personJson {
+        t.Errorf(""handler returned unexpected body: got %v want %v"",
+            rr.Body.String(), personJson)
+    }
+}
+
+go test 
+./main_test.go:84:11: undefined: mux.SetURLVars  
+
+..what am I missing?
+",26182433,2017-12-11 03:09:51+00:00,2017-12-11 03:09:51+00:00
+5ab525f4fb1678e197ae59401e9050fa0b6cb5fd,"What version of mux are you using?
+
+$ git rev-parse HEAD
+
+
+Make sure you are on tip of master:
+
+$ go get -u github.com/gorilla/mux
+On Sun, Dec 10, 2017 at 7:09 PM Eric Lang <notifications@github.com> wrote:
+
+> import ""github.com/gorilla/mux""
+> func TestCreatePerson(t *testing.T) {
+>
+> personJson := `{""Role"":1, ""Firstname"": ""Testy"", ""Lastname"": ""Tester"", ""Address"": {""City"": ""Seattle"", ""State"": ""WA"", ""Country"": ""USA""}}`
+>
+> reader := strings.NewReader(personJson)
+>
+> req, err := http.NewRequest(""POST"", ""/people"", reader)
+> if err != nil {
+>     t.Fatal(err)
+> }
+>
+> req = mux.SetURLVars(req, map[string]string{""id"":""3""})
+>
+> rr := httptest.NewRecorder()
+> handler := http.HandlerFunc(CreatePersonHandler)
+> handler.ServeHTTP(rr, req)
+>
+> if status := rr.Code; status != http.StatusOK {
+>     t.Errorf(""handler returned wrong status code: got %v want %v"",
+>         status, http.StatusOK)
+> }
+>
+> if rr.Body.String() != personJson {
+>     t.Errorf(""handler returned unexpected body: got %v want %v"",
+>         rr.Body.String(), personJson)
+> }
+>
+> }
+>
+> go test
+> ./main_test.go:84:11: undefined: mux.SetURLVars
+>
+> ..what am I missing?
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gorilla/mux/commit/5ab525f4fb1678e197ae59401e9050fa0b6cb5fd#commitcomment-26182433>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AABIcNKDF06rkkK2EdbZNkQkWsK4Ajrmks5s_J0AgaJpZM4Q8zym>
+> .
+>
+",26182439,2017-12-11 03:12:26+00:00,2017-12-11 03:12:26+00:00
+5ab525f4fb1678e197ae59401e9050fa0b6cb5fd,"did that:  go get -u github.com/gorilla/mux 
+same error",26182449,2017-12-11 03:16:12+00:00,2017-12-11 03:16:12+00:00
+5ab525f4fb1678e197ae59401e9050fa0b6cb5fd,Can you please open a new issue and fill out the issue template?,26182895,2017-12-11 04:51:46+00:00,2017-12-11 04:51:46+00:00
+5ab525f4fb1678e197ae59401e9050fa0b6cb5fd,"Never mind. I reduced it down and now it works, so clearly a problem on my side. Thanks
+
+//=================================================
+```
+//main.go
+
+package main
+
+import (
+	""github.com/gorilla/mux""
+	""encoding/json""
+	""log""
+	""net/http""
+	""strconv""
+	""os""
+	""fmt""
+)
+
+
+func determineListenAddress() (string, error) {
+  port := os.Getenv(""PORT"")
+  if port == """" {
+    return """", fmt.Errorf(""$PORT not set"")
+  }
+  return "":"" + port, nil
+}
+
+type Person struct {
+	ID        int   		`json:""id""`
+	Firstname string   	`json:""firstname,omitempty""`
+	Lastname  string   	`json:""lastname,omitempty""`
+}
+
+var people 		[]Person
+
+func CreatePersonHandler(w http.ResponseWriter, r *http.Request) {
+
+	var i int
+	params := mux.Vars(r)
+	var person Person
+
+	if r.Body == nil {
+		http.Error(w, ""Body: No request body"", 400)		//400: no body
+		return
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&person)
+	if err != nil {
+		http.Error(w, ""Body: "" + err.Error(), 400)		//400: poorly formed json in body
+		return
+	}
+  defer r.Body.Close()
+
+	i, err = strconv.Atoi(params[""id""])
+	if err != nil {
+		http.Error(w, ""ID: "" + err.Error(), 400)			//400: poorly formed id
+		return
+	}
+
+	for _, item := range people {
+		if item.ID == i {
+			http.Error(w, ""ID: already exists"", 400)		//400: id already exists
+			return
+		}
+	}
+
+	person.ID = i
+	people = append(people, person)
+	json.NewEncoder(w).Encode(person)								//200: person added, return it
+}
+
+func main() {
+  addr, err := determineListenAddress()
+  if err != nil {
+    log.Fatal(err)
+  }
+
+	router := mux.NewRouter()
+
+	router.HandleFunc(""/people/{id}"", CreatePersonHandler).Methods(""POST"")
+		
+  log.Printf(""Listening on %s...\n"", addr)
+	log.Fatal(http.ListenAndServe(addr, router))
+}
+
+//main_test.go
+
+package main
+
+import (
+		""github.com/gorilla/mux""
+        ""net/http""
+		""net/http/httptest""
+        ""testing""
+        ""strings""
+)
+
+func TestCreatePerson(t *testing.T) {
+
+    personJson := `{""Firstname"": ""Testy"", ""Lastname"": ""Tester""}`
+
+    reader := strings.NewReader(personJson)
+
+    req, err := http.NewRequest(""POST"", ""/people"", reader)
+    if err != nil {
+        t.Fatal(err)
+    }
+    
+    req = mux.SetURLVars(req, map[string]string{""id"":""3""})
+
+    rr := httptest.NewRecorder()
+    handler := http.HandlerFunc(CreatePersonHandler)
+
+    handler.ServeHTTP(rr, req)
+
+    if status := rr.Code; status != http.StatusOK {
+        t.Errorf(""handler returned wrong status code: got %v want %v"",
+            status, http.StatusOK)
+    }
+
+    expected := `{""id"":3,""firstname"":""Testy"",""lastname"":""Tester""}`
+
+    if strings.TrimSpace(rr.Body.String()) != strings.TrimSpace(expected) {
+
+        t.Errorf(""handler returned unexpected body: got %v want %v"",
+            rr.Body.String(), expected)
+    }
+
+}
+```
+
+",26183463,2017-12-11 05:54:05+00:00,2017-12-11 05:54:05+00:00
+7904d2e42e7ebbdb4a6eb3e57eb201b11df25c57,All the other test files belong to the `mux` package. Why is this one different?,26690273,2018-01-06 18:59:45+00:00,2018-01-06 18:59:45+00:00
+7904d2e42e7ebbdb4a6eb3e57eb201b11df25c57,"This prevents the tests from accessing private (not-exported) identifiers, which is a valid approach for these tests.
+
+If you need to add tests, both approaches are acceptable, depending on needs. I could see the Middleware tests using both.",26690321,2018-01-06 19:06:01+00:00,2018-01-06 19:06:01+00:00
+7904d2e42e7ebbdb4a6eb3e57eb201b11df25c57,"It's not actually relevant imho, but having it on a different package makes it crash if mux code is on a different path than `""github.com/gorilla/mux""` (which is kind of a go design problem, but whatever). Nvm, just wanted to note it in case it was a typo :)",26690340,2018-01-06 19:08:55+00:00,2018-01-06 19:08:55+00:00
+7904d2e42e7ebbdb4a6eb3e57eb201b11df25c57,"Ah, good point. In this case you could probably change it to “mux” but the
+“$package_test” approach forces a nice separation.
+On Sat, Jan 6, 2018 at 11:08 AM Roberto Santalla <notifications@github.com>
+wrote:
+
+> It's not actually relevant imho, but having it on a different package
+> makes it crash if mux code is on a different path than ""
+> github.com/gorilla/mux"" (which is kind of a go design problem, but
+> whatever). Nvm, just wanted to note it in case it was a typo :)
+>
+> —
+> You are receiving this because you commented.
+>
+>
+> Reply to this email directly, view it on GitHub
+> <https://github.com/gorilla/mux/commit/7904d2e42e7ebbdb4a6eb3e57eb201b11df25c57#commitcomment-26690340>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AABIcIjnCrcemFLU67sQ7C2n5adxaPp9ks5tH8TIgaJpZM4RVZ3j>
+> .
+>
+",26691103,2018-01-06 20:42:27+00:00,2018-01-06 20:42:27+00:00
+7904d2e42e7ebbdb4a6eb3e57eb201b11df25c57,"Also it seems to be the cause of [that](https://github.com/gorilla/mux/pull/294#issuecomment-355425622) strange go vet issue.
+
+But again, I don't think it's actually worth changing if there are reasons to keep it this way. Just wanted to note it :P",26691160,2018-01-06 20:47:19+00:00,2018-01-06 20:47:19+00:00
+12a13f34e4fd6f7c8cbd499c446bded8d09ad8ad,"This has a gotcha to be wary of.
+
+It _looks_ like your change simply removes `go get golang.org/x/tools/cmd/vet` from happening, but that's not quite all.
+
+Because there's no longer a custom `install` section, Travis supplies its own default, which is `go get -t -v ./...`. But that step is already a part of `script`, and we want it there (so that if `gorilla/mux` fails to compile successfully because a dependency fails to build, the Travis build fails with red rather than an error).
+
+So now that step is repeated twice:
+
+![image](https://cloud.githubusercontent.com/assets/1924134/15036430/820ed9e4-1243-11e6-8675-eb5e68a92b0e.png)
+
+(See https://travis-ci.org/gorilla/mux/jobs/127290793.)
+
+Instead, I suggest having a blank `install` section like this:
+
+```
+install:
+  - # Do nothing. This is needed to prevent default install action ""go get -t -v ./..."" from happening here (we want it to happen inside script step).
+
+script:
+  - go get -t -v ./...
+  - diff -u <(echo -n) <(gofmt -d -s .)
+  - go tool vet .
+  - go test -v -race ./...
+```
+",17362811,2016-05-05 05:00:45+00:00,2016-05-05 05:00:45+00:00
+12a13f34e4fd6f7c8cbd499c446bded8d09ad8ad,"Thanks for catching this! Is this documented anywhere on the TravisCI side?
+
+On Wed, May 4, 2016 at 10:00 PM Dmitri Shuralyov notifications@github.com
+wrote:
+
+> This has a gotcha to be wary of.
+> 
+> It _looks_ like your change simply removes go get
+> golang.org/x/tools/cmd/vet from happening, but that's not quite all.
+> 
+> Because there's no longer a custom install section, Travis supplies its
+> own default, which is go get -t -v ./.... But that step is already a part
+> of script, and we want it there (so that if gorilla/mux fails to compile
+> successfully because a dependency fails to build, the Travis build fails
+> with red rather than an error).
+> 
+> So now that step is repeated twice:
+> 
+> [image: image]
+> https://cloud.githubusercontent.com/assets/1924134/15036430/820ed9e4-1243-11e6-8675-eb5e68a92b0e.png
+> 
+> (See https://travis-ci.org/gorilla/mux/jobs/127290793.)
+> 
+> Instead, I suggest having a blank install section like this:
+> 
+> install:
+> - # Do nothing. This is needed to prevent default install action ""go get -t -v ./..."" from happening here (we want it to happen inside script step).
+> 
+> script:
+> - go get -t -v ./...
+> - diff -u <(echo -n) <(gofmt -d -s .)
+> - go tool vet .
+> - go test -v -race ./...
+> 
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly or view it on GitHub
+> https://github.com/gorilla/mux/commit/12a13f34e4fd6f7c8cbd499c446bded8d09ad8ad#commitcomment-17362811
+",17368663,2016-05-05 16:23:54+00:00,2016-05-05 16:23:54+00:00
+12a13f34e4fd6f7c8cbd499c446bded8d09ad8ad,"I found out the exact details through experimentation, but it is documented at https://docs.travis-ci.com/user/languages/go#Dependency-Management:
+
+> By default the install step defers to `go get ./...` or `go get -t ./...` if the version of go is greater than or equal to 1.2.
+",17368959,2016-05-05 16:48:54+00:00,2016-05-05 16:49:09+00:00
+12a13f34e4fd6f7c8cbd499c446bded8d09ad8ad,"Wouldn't it make more sense to remove the redundant `get` from `script:` then? Seems like that should have been part of `install:` (which makes sense, as it installs the package...)
+",17368988,2016-05-05 16:52:56+00:00,2016-05-05 16:53:10+00:00
+12a13f34e4fd6f7c8cbd499c446bded8d09ad8ad,"> Wouldn't it make more sense to remove the redundant get from script: then? Seems like that should have been part of `install:` (which makes sense, as it installs the package...)
+
+You could. That was the original version I started out with.
+
+The key difference between the two sections is that when some command fails within `script` section, the CI gets a red build failing status. But if a command fails within `install` section, the CI is marked with a gray Travis error status.
+
+After some time, I decided to move the `go get -t ./...` step into `script`. The rationale is that `go get -t ./...` does not just download dependencies, it also builds them. Since this package does not use vendoring, I consider it to be this package's responsibility to only import other Go packages that are building successfully.
+
+For example, imagine someone makes a PR that adds a new import path of a Go package that fails to build. If `go get -t ./...` step is inside `install`, then the build will show a gray ""Travis error"" message. But I don't consider it an error running Travis CI, I consider it a valid red build failing status. Travis succeeded at showing that the Go package is currently in a broken state. Or if someone breaks github.com/gorilla/schema such that mux fails to compile; again, that should be a red failing status, not a gray Travis error, because users doing `go get github.com/gorilla/mux` (for the first time) will not succeed.
+
+Put simply, I expect to see the red build failing status if the package doesn't compile either because there's a  compilation error in its own .go files, or in those of a dependency it imports.
+
+The difference is not large, but after spending lots of time thinking about it, I consider having `go get -t ./...` inside `script` as ever so _slightly_ better. I [generate](https://github.com/shurcooL/cmd/blob/29b3b215f24fed434922acf6333d605c9a7cc69a/gorepogen/main.go#L50-L66) the .travis.yml file for all my repos, so it's not hard for me to maintain best practices across many repos.
+",17370783,2016-05-05 19:04:48+00:00,2016-05-05 19:08:44+00:00
+12a13f34e4fd6f7c8cbd499c446bded8d09ad8ad,"Maybe Travis should remove the default in the install section and let people customize it on their own.
+",17371248,2016-05-05 19:38:20+00:00,2016-05-05 19:38:20+00:00
+12a13f34e4fd6f7c8cbd499c446bded8d09ad8ad,"I think at this point that would probably break a lot of existing projects ... also I think their philosophy is to have useful defaults
+",17371551,2016-05-05 20:00:52+00:00,2016-05-05 20:00:52+00:00
+0c9d5c08c1d6103f2ced11750a195fc94902d3fc,"@burrbd I think this broke `Query` which accept any value but require the specific query parameters. I'm not sure if it was from this commit or the one before but I had to revert to 47e8f450ef38c857cdd922ec08862ca9d65a1c6d
+
+For example the following doesn't match `/someroute?abc=123` like it did before.
+`myMux.Path(""/someroute"").Queries(""abc"", """").Methods(""GET"").HandlerFunc(myHandler)`
+
+Specifically this part from the [docs](https://github.com/gorilla/mux/blob/master/route.go#L324) is no longer true
+`It the value is an empty string, it will match any value if the key is set.`
+",12192561,2015-07-16 00:37:56+00:00,2015-07-16 00:39:20+00:00
+0c9d5c08c1d6103f2ced11750a195fc94902d3fc,"Yeah it definitely broke it. Sadly there was no test case for this behaviour :/
+",12196636,2015-07-16 07:16:52+00:00,2015-07-16 07:16:52+00:00
+0c9d5c08c1d6103f2ced11750a195fc94902d3fc,"I have a simple fix which basically treats an empty string as `{key}` where `key` is the name of the query key, but I'm not sure if that's the best way to do it. A more involved one which doesn't modify vars is probably possible...
+",12196652,2015-07-16 07:18:02+00:00,2015-07-16 07:18:02+00:00
+0c9d5c08c1d6103f2ced11750a195fc94902d3fc,"Oh, nuts. I've submitted a PR here https://github.com/gorilla/mux/pull/108.
+",12199564,2015-07-16 10:06:54+00:00,2015-07-16 10:06:54+00:00
