@@ -1,0 +1,101 @@
+rank,item,repo_name,stars,type,forks,language,repo_url,username,issues,last_commit,description
+1,Go,go,107647,foundation,15812,Go,https://github.com/golang/go,golang,7815,2023-01-18T07:23:10Z,The Go programming language
+2,Go,kubernetes,95218,foundation,34899,Go,https://github.com/kubernetes/kubernetes,kubernetes,1569,2023-01-18T09:55:06Z,Production-Grade Container Scheduling and Management
+3,Go,awesome-go,94802,solo,10642,Go,https://github.com/avelino/awesome-go,avelino,24,2023-01-18T09:37:08Z,"A curated list of awesome Go frameworks, libraries and software"
+4,Go,gin,65870,community,7184,Go,https://github.com/gin-gonic/gin,gin-gonic,480,2023-01-17T15:12:55Z,"Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need smashing performance, get yourself some Gin."
+5,Go,moby,64946,foundation,18457,Go,https://github.com/moby/moby,moby,3978,2023-01-18T09:42:34Z,Moby Project - a collaborative project for the container ecosystem to assemble container-based systems
+6,Go,hugo,64785,monarchist,6988,Go,https://github.com/gohugoio/hugo,gohugoio,619,2023-01-18T09:21:56Z,The world’s fastest framework for building websites.
+7,Go,frp,63591,monarchist,11037,Go,https://github.com/fatedier/frp,fatedier,103,2023-01-15T11:15:48Z,A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet.
+8,Go,fzf,49276,monarchist,2112,Go,https://github.com/junegunn/fzf,junegunn,246,2023-01-17T18:46:14Z,:cherry_blossom: A command-line fuzzy finder
+9,Go,syncthing,48772,foundation,3653,Go,https://github.com/syncthing/syncthing,syncthing,331,2023-01-17T19:08:46Z,Open Source Continuous File Synchronization
+10,Go,prometheus,46381,foundation,7807,Go,https://github.com/prometheus/prometheus,prometheus,577,2023-01-18T08:00:25Z,The Prometheus monitoring system and time series database.
+11,Go,caddy,45377,corporate,3512,Go,https://github.com/caddyserver/caddy,caddyserver,97,2023-01-17T12:07:07Z,Fast and extensible multi-platform HTTP/1-2-3 web server with automatic HTTPS
+12,Go,etcd,42346,foundation,9015,Go,https://github.com/etcd-io/etcd,etcd-io,139,2023-01-18T08:43:45Z,Distributed reliable key-value store for the most critical data of a distributed system
+13,Go,gogs,41501,community,4685,Go,https://github.com/gogs/gogs,gogs,809,2023-01-18T02:07:32Z,Gogs is a painless self-hosted Git service
+14,Go,build-web-application-with-golang,41478,community,10692,Go,https://github.com/astaxie/build-web-application-with-golang,astaxie,112,2022-12-29T05:46:04Z,A golang ebook intro how to build a web with golang
+15,Go,v2ray-core,41306,monarchist,8543,Go,https://github.com/v2ray/v2ray-core,v2ray,26,2023-01-13T02:32:53Z,A platform for building proxies to bypass network restrictions.
+16,Go,traefik,41173,corporate,4457,Go,https://github.com/traefik/traefik,traefik,581,2023-01-12T11:28:05Z,The Cloud Native Application Proxy
+17,Go,go-ethereum,40888,foundation,15772,Go,https://github.com/ethereum/go-ethereum,ethereum,262,2023-01-18T08:47:50Z,Official Go implementation of the Ethereum protocol
+18,Go,mkcert,39222,monarchist,1995,Go,https://github.com/FiloSottile/mkcert,FiloSottile,80,2023-01-16T15:27:32Z,A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+19,Go,minio,37095,corporate,4415,Go,https://github.com/minio/minio,minio,20,2023-01-18T07:46:47Z,Multi-Cloud :cloud: Object Storage 
+20,Go,rclone,36596,corporate,3333,Go,https://github.com/rclone/rclone,rclone,775,2023-01-18T07:32:03Z,"""rsync for cloud storage"" - Google Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Wasabi, Google Cloud Storage, Yandex Files"
+21,Go,terraform,35835,corporate,8282,Go,https://github.com/hashicorp/terraform,hashicorp,1581,2023-01-18T09:49:42Z,"Terraform enables you to safely and predictably create, change, and improve infrastructure. It is an open source tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned."
+22,Go,clash,35474,,4732,Go,https://github.com/Dreamacro/clash,Dreamacro,63,2023-01-18T08:58:03Z,A rule-based tunnel in Go.
+23,Go,dive,35360,monarchist,1416,Go,https://github.com/wagoodman/dive,wagoodman,121,2023-01-14T08:17:16Z,A tool for exploring each layer in a docker image
+24,Go,esbuild,34350,corporate,953,Go,https://github.com/evanw/esbuild,evanw,243,2023-01-17T06:40:40Z,An extremely fast bundler for the web
+25,Go,gitea,34235,corporate,4338,Go,https://github.com/go-gitea/gitea,go-gitea,1923,2023-01-18T09:44:02Z,"Git with a cup of tea, painless self-hosted git service"
+26,Go,act,34039,monarchist,862,Go,https://github.com/nektos/act,nektos,75,2023-01-18T06:26:07Z,Run your GitHub Actions locally 🚀
+27,Go,tidb,33199,corporate,5379,Go,https://github.com/pingcap/tidb,pingcap,2910,2023-01-18T09:51:28Z,"TiDB is an open-source, cloud-native, distributed, MySQL-Compatible database for elastic scale and real-time analytics. Try AI-powered Chat2Query free at : https://tidbcloud.com/free-trial"
+28,Go,istio,32224,foundation,6924,Go,https://github.com/istio/istio,istio,527,2023-01-18T07:03:08Z,"Connect, secure, control, and observe services."
+29,Go,lazygit,32090,community,1318,Go,https://github.com/jesseduffield/lazygit,jesseduffield,389,2023-01-18T08:23:56Z,simple terminal UI for git commands
+30,Go,the-way-to-go_ZH_CN,31929,community,8381,Go,https://github.com/unknwon/the-way-to-go_ZH_CN,unknwon,0,2022-12-28T01:22:56Z,《The Way to Go》中文译本，中文正式名《Go 入门指南》
+31,Go,gorm,31128,monarchist,3439,Go,https://github.com/go-gorm/gorm,go-gorm,171,2023-01-16T07:06:02Z,"The fantastic ORM library for Golang, aims to be developer friendly"
+32,Go,cli,31027,corporate,4582,Go,https://github.com/cli/cli,cli,391,2023-01-18T06:43:59Z,GitHub’s official command line tool
+33,Go,cobra,30358,community,2594,Go,https://github.com/spf13/cobra,spf13,114,2023-01-09T14:22:22Z,A Commander for modern Go CLI interactions
+34,Go,beego,29311,monarchist,5546,Go,https://github.com/beego/beego,beego,7,2023-01-18T07:29:44Z,"beego is an open-source, high-performance web framework for the Go programming language."
+35,Go,LeetCode-Go,28935,monarchist,5239,Go,https://github.com/halfrost/LeetCode-Go,halfrost,12,2023-01-04T18:30:02Z,"✅ Solutions to LeetCode by Go, 100% test coverage, runtime beats 100% / LeetCode 题解"
+36,Go,compose,28305,corporate,4699,Go,https://github.com/docker/compose,docker,207,2023-01-18T09:55:27Z,Define and run multi-container applications with Docker
+37,Go,vault,26812,corporate,3661,Go,https://github.com/hashicorp/vault,hashicorp,859,2023-01-18T08:53:15Z,"A tool for secrets management, encryption as a service, and privileged access management"
+38,Go,cockroach,26424,corporate,3344,Go,https://github.com/cockroachdb/cockroach,cockroachdb,5222,2023-01-18T09:57:34Z,"CockroachDB - the open source, cloud-native distributed SQL database."
+39,Go,drone,26338,foundation,2574,Go,https://github.com/harness/drone,harness,52,2023-01-15T02:42:12Z,"Drone is a Container-Native, Continuous Delivery Platform"
+40,Go,consul,25901,corporate,4214,Go,https://github.com/hashicorp/consul,hashicorp,1018,2023-01-18T03:29:10Z,"Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure."
+41,Go,minikube,25718,foundation,4417,Go,https://github.com/kubernetes/minikube,kubernetes,791,2023-01-18T02:43:50Z,Run Kubernetes locally
+42,Go,nvm-windows,25369,monarchist,2617,Go,https://github.com/coreybutler/nvm-windows,coreybutler,74,2023-01-07T05:55:06Z,A node.js version management utility for Windows. Ironically written in Go.
+43,Go,lazydocker,25327,monarchist,929,Go,https://github.com/jesseduffield/lazydocker,jesseduffield,81,2023-01-16T17:21:19Z,The lazier way to manage everything docker
+44,Go,influxdb,24769,corporate,3312,Go,https://github.com/influxdata/influxdb,influxdata,1625,2023-01-17T23:02:43Z,"Scalable datastore for metrics, events, and real-time analytics"
+45,Go,echo,24707,corporate,2092,Go,https://github.com/labstack/echo,labstack,44,2023-01-03T22:09:30Z,"High performance, minimalist Go web framework"
+46,Go,mattermost-server,24629,corporate,5904,Go,https://github.com/mattermost/mattermost-server,mattermost,576,2023-01-18T09:34:44Z,Mattermost is an open source platform for secure collaboration across the entire software development lifecycle.
+47,Go,kit,24429,foundation,2385,Go,https://github.com/go-kit/kit,go-kit,35,2023-01-02T06:10:18Z,A standard library for microservices.
+48,Go,nps,24429,monarchist,4492,Go,https://github.com/ehang-io/nps,ehang-io,384,2022-12-19T19:25:06Z,"一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等等……，并带有功能强大的web管理端。a lightweight, high-performance, powerful intranet penetration proxy server, with a powerful web management terminal."
+49,Go,portainer,24243,corporate,2111,Go,https://github.com/portainer/portainer,portainer,909,2023-01-18T02:20:44Z,Making Docker and Kubernetes management easy.
+50,Go,photoprism,24141,corporate,1374,Go,https://github.com/photoprism/photoprism,photoprism,332,2023-01-18T04:55:44Z,AI-Powered Photos App for the Decentralized Web 🌈💎✨
+51,Go,fiber,24111,foundation,1236,Go,https://github.com/gofiber/fiber,gofiber,28,2023-01-18T07:36:09Z,⚡️ Express inspired web framework written in Go
+52,Go,helm,23458,foundation,6515,Go,https://github.com/helm/helm,helm,279,2023-01-18T02:56:04Z,The Kubernetes Package Manager
+53,Go,iris,23441,corporate,2463,Go,https://github.com/kataras/iris,kataras,78,2023-01-14T01:40:44Z,"The fastest HTTP/2 Go Web Framework. New, modern, easy to learn. Fast development with Code you control. Unbeatable cost-performance ratio :leaves: :rocket: | 谢谢 | #golang"
+54,Go,nsq,23121,foundation,2819,Go,https://github.com/nsqio/nsq,nsqio,50,2023-01-18T08:46:30Z,A realtime distributed messaging platform
+55,Go,faas,22548,corporate,1822,Go,https://github.com/openfaas/faas,openfaas,29,2023-01-17T22:00:02Z,OpenFaaS - Serverless Functions Made Simple
+56,Go,ngrok,22494,community,4148,Go,https://github.com/inconshreveable/ngrok,inconshreveable,204,2022-08-23T07:11:57Z,Introspected tunnels to localhost
+57,Go,go-zero,22317,foundation,3196,Go,https://github.com/zeromicro/go-zero,zeromicro,162,2023-01-18T09:20:45Z,A cloud-native Go microservices framework with cli tool for productivity.
+58,Go,hub,22247,monarchist,2350,Go,https://github.com/github/hub,github,234,2022-12-19T00:44:24Z,A command-line tool that makes git easier to use with GitHub.
+59,Go,k3s,22009,foundation,1943,Go,https://github.com/k3s-io/k3s,k3s-io,264,2023-01-18T03:25:51Z,Lightweight Kubernetes
+60,Go,logrus,21987,community,2208,Go,https://github.com/sirupsen/logrus,sirupsen,6,2023-01-15T13:31:02Z,"Structured, pluggable logging for Go."
+61,Go,viper,21772,community,1819,Go,https://github.com/spf13/viper,spf13,352,2023-01-13T17:03:05Z,Go configuration with fangs
+62,Go,docker_practice,21715,community,5455,Go,https://github.com/yeasy/docker_practice,yeasy,3,2023-01-17T20:03:57Z,"Learn and understand Docker&Container technologies, with real DevOps practice!"
+63,Go,croc,21584,community,939,Go,https://github.com/schollz/croc,schollz,91,2023-01-13T15:29:21Z,Easily and securely send things from one computer to another :crocodile: :package:
+64,Go,go-patterns,21122,monarchist,1966,Go,https://github.com/tmrts/go-patterns,tmrts,14,2022-08-07T21:44:59Z,"Curated list of Go design patterns, recipes and idioms"
+65,Go,micro,20920,monarchist,1089,Go,https://github.com/zyedidia/micro,zyedidia,655,2023-01-13T03:19:25Z,A modern and intuitive terminal-based text editor
+66,Go,vegeta,20676,monarchist,1277,Go,https://github.com/tsenart/vegeta,tsenart,85,2023-01-17T15:47:32Z,HTTP load testing tool and library. It's over 9000!
+67,Go,rancher,20469,corporate,2723,Go,https://github.com/rancher/rancher,rancher,2188,2023-01-18T09:31:22Z,Complete container management platform
+68,Go,dapr,20245,corporate,1601,Go,https://github.com/dapr/dapr,dapr,343,2023-01-18T05:18:43Z,"Dapr is a portable, event-driven, runtime for building distributed applications across cloud and edge."
+69,Go,v2ray-core,20228,foundation,3301,Go,https://github.com/v2fly/v2ray-core,v2fly,61,2023-01-16T14:08:32Z,A platform for building proxies to bypass network restrictions.
+70,Go,pocketbase,20113,community,761,Go,https://github.com/pocketbase/pocketbase,pocketbase,41,2023-01-17T21:05:21Z,Open Source realtime backend in 1 file
+71,Go,lux,19992,community,2392,Go,https://github.com/iawia002/lux,iawia002,413,2023-01-13T05:38:15Z,👾 Fast and simple video download library and CLI tool written in Go
+72,Go,go-micro,19949,community,2219,Go,https://github.com/go-micro/go-micro,go-micro,61,2023-01-03T11:58:03Z,A Go microservices framework
+73,Go,delve,19856,corporate,1998,Go,https://github.com/go-delve/delve,go-delve,104,2023-01-16T17:20:43Z,Delve is a debugger for the Go programming language.
+74,Go,kratos,19708,foundation,3712,Go,https://github.com/go-kratos/kratos,go-kratos,94,2023-01-18T03:47:36Z,Your ultimate Go microservices framework for the cloud-native era.
+75,Go,cli,19635,monarchist,1657,Go,https://github.com/urfave/cli,urfave,37,2023-01-17T19:10:05Z,"A simple, fast, and fun package for building command line apps in Go"
+76,Go,k9s,19307,foundation,1228,Go,https://github.com/derailed/k9s,derailed,338,2023-01-16T23:01:18Z,🐶 Kubernetes CLI To Manage Your Clusters In Style!
+77,Go,fyne,19238,corporate,1066,Go,https://github.com/fyne-io/fyne,fyne-io,459,2023-01-17T22:08:15Z,Cross platform GUI in Go inspired by Material Design
+78,Go,harbor,19203,foundation,4250,Go,https://github.com/goharbor/harbor,goharbor,523,2023-01-18T02:43:55Z,"An open source trusted cloud native registry project that stores, signs, and scans content."
+79,Go,restic,19150,community,1253,Go,https://github.com/restic/restic,restic,356,2023-01-14T19:41:21Z,"Fast, secure, efficient backup program"
+80,Go,k6,19128,corporate,1004,Go,https://github.com/grafana/k6,grafana,372,2023-01-18T08:48:50Z,"A modern load testing tool, using Go and JavaScript - https://k6.io"
+81,Go,filebrowser,18415,monarchist,2248,Go,https://github.com/filebrowser/filebrowser,filebrowser,54,2023-01-18T08:37:52Z,📂 Web File Browser
+82,Go,loki,18073,corporate,2456,Go,https://github.com/grafana/loki,grafana,647,2023-01-18T10:01:07Z,"Like Prometheus, but for logs."
+83,Go,mux,18029,community,1677,Go,https://github.com/gorilla/mux,gorilla,16,2022-12-09T15:56:57Z,A powerful HTTP router and URL matcher for building Go web servers with 🦍
+84,Go,zap,17855,corporate,1264,Go,https://github.com/uber-go/zap,uber-go,91,2023-01-18T06:23:11Z,"Blazing fast, structured, leveled logging in Go."
+85,Go,gotty,17413,monarchist,1325,Go,https://github.com/yudai/gotty,yudai,102,2023-01-03T18:48:03Z,Share your terminal as a web application
+86,Go,grpc-go,17404,foundation,3874,Go,https://github.com/grpc/grpc-go,grpc,131,2023-01-18T01:28:15Z,The Go language implementation of gRPC. HTTP/2 based RPC
+87,Go,Cloudreve,17028,corporate,2930,Go,https://github.com/cloudreve/Cloudreve,cloudreve,253,2023-01-13T03:58:46Z,"🌩支持多家云存储的云盘系统 (Self-hosted file management and sharing system, supports multiple storage providers)"
+88,Go,jaeger,16988,foundation,2039,Go,https://github.com/jaegertracing/jaeger,jaegertracing,312,2023-01-17T21:25:31Z,"CNCF Jaeger, a Distributed Tracing Platform"
+89,Go,learngo,16777,monarchist,2205,Go,https://github.com/inancgumus/learngo,inancgumus,1,2023-01-16T04:38:51Z,"❤️ 1000+ Hand-Crafted Go Examples, Exercises, and Quizzes. 🚀 Learn Go by fixing 1000+ tiny programs."
+90,Go,goreplay,16735,corporate,1693,Go,https://github.com/buger/goreplay,buger,257,2023-01-15T17:57:59Z,"GoReplay is an open-source tool for capturing and replaying live HTTP traffic into a test environment in order to continuously test your system with real data. It can be used to increase confidence in code deployments, configuration changes and infrastructure changes."
+91,Go,alist,16691,corporate,2386,Go,https://github.com/alist-org/alist,alist-org,68,2023-01-18T02:58:01Z,"🗂️A file list program that supports multiple storage, powered by Gin and Solidjs. / 一个支持多存储的文件列表程序，使用 Gin 和 Solidjs。"
+92,Go,websocketd,16657,monarchist,996,Go,https://github.com/joewalnes/websocketd,joewalnes,39,2023-01-02T18:25:59Z,"Turn any program that uses STDIN/STDOUT into a WebSocket server. Like inetd, but for WebSockets. "
+93,Go,bubbletea,16599,community,513,Go,https://github.com/charmbracelet/bubbletea,charmbracelet,32,2023-01-15T21:37:26Z,A powerful little TUI framework 🏗
+94,Go,xbar,16558,monarchist,643,Go,https://github.com/matryer/xbar,matryer,132,2022-10-21T13:02:38Z,Put the output from any script or program into your macOS Menu Bar (the BitBar reboot)
+95,Go,podman,16516,corporate,1769,Go,https://github.com/containers/podman,containers,347,2023-01-18T09:57:15Z,Podman: A tool for managing OCI containers and pods.
+96,Go,seaweedfs,16377,monarchist,1917,Go,https://github.com/seaweedfs/seaweedfs,seaweedfs,125,2023-01-17T13:34:42Z,"SeaweedFS is a fast distributed storage system for blobs, objects, files, and data lake, for billions of files! Blob store has O(1) disk seek, cloud tiering. Filer supports Cloud Drive, cross-DC active-active replication, Kubernetes, POSIX FUSE mount, S3 API, S3 Gateway, Hadoop, WebDAV, encryption, Erasure Coding."
+97,Go,redis,16231,corporate,1956,Go,https://github.com/go-redis/redis,go-redis,151,2023-01-11T05:21:13Z,Type-safe Redis client for Golang
+98,Go,slim,15980,corporate,603,Go,https://github.com/slimtoolkit/slim,slimtoolkit,133,2023-01-18T03:18:42Z,Slim(toolkit): Don't change anything in your container image and minify it by up to 30x (and for compiled languages even more) making it secure too! (free and open source)
+99,Go,fx,15920,solo,444,Go,https://github.com/antonmedv/fx,antonmedv,15,2022-11-09T03:00:30Z,Terminal JSON viewer
+100,Go,trivy,15711,corporate,1519,Go,https://github.com/aquasecurity/trivy,aquasecurity,289,2023-01-18T09:33:10Z,"Find vulnerabilities, misconfigurations, secrets, SBOM in containers, Kubernetes, code repositories, clouds and more"

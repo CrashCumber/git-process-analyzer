@@ -35,6 +35,6 @@ if __name__ == "__main__":
         all_branch=args.all_branch,
         commits_cnt=args.commits,
         tag_cnt=args.tags,
-        dir_dataset=args.dest_path,
+        dir_dataset=args.dir_dataset,
     )
     logger.info("Finish extract from %s", args)

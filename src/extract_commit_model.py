@@ -2,6 +2,7 @@ import os
 import time
 
 from github import Auth, Github
+from github.GithubException import UnknownObjectException
 
 from logger import logger
 from models import (
@@ -70,17 +71,20 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
             sha = tag.commit.sha
             logger.info("tag %s", sha)
             tag_writer.writerow(TagRow.from_dict(tag))
-
-            release = repo.get_release(tag.name)
-            release_writer.writerow(ReleaseRow.from_dict(sha, release))
-            user_writer.writerow(
-                UserRow.from_dict(
-                    sha,
-                    UserEventType.create_release,
-                    release.author,
-                    release.created_at,
+            try:
+                release = repo.get_release(tag.name)
+            except UnknownObjectException:
+                logger.info("no release for tag %s", tag.name)
+            else:
+                release_writer.writerow(ReleaseRow.from_dict(sha, release))
+                user_writer.writerow(
+                    UserRow.from_dict(
+                        sha,
+                        UserEventType.create_release,
+                        release.author,
+                        release.created_at,
+                    )
                 )
-            )
 
         for branch in branches:
             for commit in repo.get_commits(sha=branch.name):

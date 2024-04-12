@@ -17,8 +17,8 @@ venv:
 	python3.11 -m venv venv
 
 install:
-	pip install --upgrade pip
-	pip install -r requirements.txt
+	python3 -m venv venv
+	venv/bin/pip install -r requirements.txt
 
 run_d:
 	python3.11 src/main.py -r mux -a gorilla &
