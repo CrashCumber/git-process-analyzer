@@ -1,4 +1,5 @@
 import argparse
+import os
 
 from extract_commit_model import extract_commits
 from logger import logger
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     logger.info("Start extract from %s", args)
     repo_name = args.author + "/" + args.repo
-    extract_commits(
+    status = extract_commits(
         repo_name,
         branch=args.branch,
         all_branch=args.all_branch,
@@ -38,3 +39,4 @@ if __name__ == "__main__":
         dir_dataset=args.dir_dataset,
     )
     logger.info("Finish extract from %s", args)
+    os._exit(status)

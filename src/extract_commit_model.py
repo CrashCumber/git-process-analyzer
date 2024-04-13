@@ -193,7 +193,9 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                     )
 
         logger.info("Success extracted")
+        status = 0
     except Exception as e:
+        status = 1
         logger.exception("Fail to extract: %s", e)
 
     g.close()
@@ -206,3 +208,4 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
     c_file.close()
     t_file.close()
     r_file.close()
+    return status
