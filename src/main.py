@@ -23,7 +23,7 @@ parser.add_argument(
 )
 parser.add_argument("--tags", "-t", dest="tags", type=int, default=None, help="number of tags for extractions")
 parser.add_argument("--branch", "-b", dest="branch", type=str, default=None, help="branch for extraction")
-parser.add_argument("--all-branch", "-ab", dest="all_branch", type=bool, default=True, help="extract all branch")
+parser.add_argument("--all-branch", "-ab", dest="all_branch", type=bool, default=False, help="extract all branch")
 parser.add_argument("--dir-dataset", "-dp", dest="dir_dataset", default=None, help="folder for dataset")
 
 if __name__ == "__main__":

@@ -17,12 +17,13 @@ venv:
 	python3.11 -m venv venv
 
 install:
-	touch .env
-	python3 -m venv venv
+	echo "export git_token=\nepos_file=\nnumber_to_extract=\nstart_from=" >> .env
+	mkdir datasets
+	python3.11 -m venv venv
 	venv/bin/pip install -r requirements.txt
 
 run_d:
-	python3.11 src/main.py -r mux -a gorilla &
+	venv/bin/python src/main.py -r mux -a gorilla &
 
 run:
-	python3.11 src/main.py -r mux -a gorilla -c 1 -t 0
+	venv/bin/python src/main.py -r mux -a gorilla -c 1 -t 0

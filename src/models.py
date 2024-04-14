@@ -52,9 +52,10 @@ class CommitRow:
     committer_id: int = field()
     create_date: str = field()
     commit_date: str = field()
+    branch: str = field()
 
     @classmethod
-    def from_dict(cls, commit: Commit):
+    def from_dict(cls, commit: Commit, branch: str):
         row = {
             "sha": commit.sha,
             "message": "",
@@ -70,6 +71,7 @@ class CommitRow:
             "comments_url": commit.comments_url,
             "url": commit.url,
             "html_url": commit.html_url,
+            "branch": branch,
         }
         if commit.author:
             row["author_id"] = commit.author.id

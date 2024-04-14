@@ -49,7 +49,6 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
     )
 
     g = Github(auth=Auth.Token(os.getenv("git_token", "")))
-    parsed_commit = set()
 
     commit_counter = Counter()
     tag_counter = Counter()
@@ -88,21 +87,13 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
 
         for branch in branches:
             for commit in repo.get_commits(sha=branch.name):
-                time.sleep(1)
                 sha = commit.sha
-                if sha in parsed_commit:
-                    continue
-
                 if commits_cnt is not None and commit_counter.count >= commits_cnt:
                     break
 
-                logger.info("commit %s", sha)
-
-                parsed_commit.add(sha)
+                logger.info("commit %s:%s", branch.name, sha)
                 commit_counter()
-
-                commit_writer.writerow(CommitRow.from_dict(commit))
-
+                commit_writer.writerow(CommitRow.from_dict(commit, branch.name))
                 if commit.author:
                     user_writer.writerow(
                         UserRow.from_dict(
@@ -146,8 +137,13 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                                 pull.merged_at,
                             )
                         )
+                    try:
+                        pull_comments = pull.get_comments()
+                    except Exception as e:
+                        logger.exception(e)
+                        pull_comments = []
 
-                    for pull_comment in pull.get_comments():
+                    for pull_comment in pull_comments:
                         if pull_comment.commit_id != sha:
                             continue
                         prcomment_writer.writerow(PullRequestCommentRow.from_dict(sha, pull_comment))
@@ -180,8 +176,13 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                                 None,
                             )
                         )
+                try:
+                    comments = commit.get_comments()
+                except Exception as e:
+                    logger.exception(e)
+                    comments = []
 
-                for comment in commit.get_comments():
+                for comment in comments:
                     comment_writer.writerow(CommentRow.from_dict(sha, comment))
                     user_writer.writerow(
                         UserRow.from_dict(
