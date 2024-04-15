@@ -11,6 +11,8 @@ from github.PullRequest import PullRequest
 from github.PullRequestComment import PullRequestComment
 from github.Tag import Tag
 
+from logger import logger
+
 
 class CaseIdType(enum.StrEnum):
     user_commit = "user-commit"
@@ -155,28 +157,32 @@ class UserRow:
 
     @classmethod
     def from_dict(cls, commit_sha: str, event: UserEventType, user: NamedUser, date: datetime | None = None):
-        row = {
-            "commit_sha": commit_sha,
-            "event": event.value,
-            "date": date,
-            "id": user.id,
-            "url": user.url,
-            "name": user.name,
-            "email": user.email,
-            "login": user.login,
-            "type": user.type,
-            "role": user.role,
-            "company": user.company,
-            "followers": user.followers,
-            "followers_url": user.followers_url,
-            "following": user.following,
-            "following_url": user.following_url,
-            "subscriptions_url": user.subscriptions_url,
-            "organizations_url": user.organizations_url,
-            "repos_url": user.repos_url,
-            "received_events_url": user.received_events_url,
-            "site_admin": user.site_admin,
-        }
+        try:
+            row = {
+                "commit_sha": commit_sha,
+                "event": event.value,
+                "date": date,
+                "id": user.id,
+                "url": user.url,
+                "name": user.name,
+                "email": user.email,
+                "login": user.login,
+                "type": user.type,
+                "role": user.role,
+                "company": user.company,
+                "followers": user.followers,
+                "followers_url": user.followers_url,
+                "following": user.following,
+                "following_url": user.following_url,
+                "subscriptions_url": user.subscriptions_url,
+                "organizations_url": user.organizations_url,
+                "repos_url": user.repos_url,
+                "received_events_url": user.received_events_url,
+                "site_admin": user.site_admin,
+            }
+        except Exception as e:
+            logger.exception(e)
+            return None
         return cls(**row)
 
 

@@ -13,6 +13,8 @@ class DataSetWriter(csv.DictWriter):
         return super().writerow(header)
 
     def writerow(self, row):
+        if row is None:
+            return
         return super().writerow(asdict(row))
 
 
