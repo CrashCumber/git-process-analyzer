@@ -156,7 +156,13 @@ class UserRow:
     followers: int = field(default=None)
 
     @classmethod
-    def from_dict(cls, commit_sha: str, event: UserEventType, user: NamedUser, date: datetime | None = None):
+    def from_dict(
+        cls,
+        commit_sha: str,
+        event: UserEventType,
+        user: NamedUser,
+        date: datetime | None = None,
+    ):
         try:
             row = {
                 "commit_sha": commit_sha,

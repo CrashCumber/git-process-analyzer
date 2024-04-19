@@ -17,35 +17,67 @@ from models import (
     UserEventType,
     UserRow,
 )
-from parsers import Counter, model_fields
+from utils import Counter, model_fields
 from writer import prepare_file
 
 
 def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=None, tag_cnt=None, dir_dataset=None):
     timestamp = str(int(time.time()))
     commit_file, commit_writer = prepare_file(
-        model_fields(CommitRow), str(CaseIdType.commits), repo_name, timestamp, dir_dataset
+        model_fields(CommitRow),
+        str(CaseIdType.commits),
+        repo_name,
+        timestamp,
+        dir_dataset,
     )
     file_file, file_writer = prepare_file(
-        model_fields(FileRow), str(CaseIdType.file_commit), repo_name, timestamp, dir_dataset
+        model_fields(FileRow),
+        str(CaseIdType.file_commit),
+        repo_name,
+        timestamp,
+        dir_dataset,
     )
     user_file, user_writer = prepare_file(
-        model_fields(UserRow), str(CaseIdType.user_commit), repo_name, timestamp, dir_dataset
+        model_fields(UserRow),
+        str(CaseIdType.user_commit),
+        repo_name,
+        timestamp,
+        dir_dataset,
     )
     pr_file, pr_writer = prepare_file(
-        model_fields(PullRequestRow), str(CaseIdType.pull_commit), repo_name, timestamp, dir_dataset
+        model_fields(PullRequestRow),
+        str(CaseIdType.pull_commit),
+        repo_name,
+        timestamp,
+        dir_dataset,
     )
     prc_file, prcomment_writer = prepare_file(
-        model_fields(PullRequestCommentRow), str(CaseIdType.pull_comment_commit), repo_name, timestamp, dir_dataset
+        model_fields(PullRequestCommentRow),
+        str(CaseIdType.pull_comment_commit),
+        repo_name,
+        timestamp,
+        dir_dataset,
     )
     c_file, comment_writer = prepare_file(
-        model_fields(CommentRow), str(CaseIdType.comment_commit), repo_name, timestamp, dir_dataset
+        model_fields(CommentRow),
+        str(CaseIdType.comment_commit),
+        repo_name,
+        timestamp,
+        dir_dataset,
     )
     t_file, tag_writer = prepare_file(
-        model_fields(TagRow), str(CaseIdType.tag_commit), repo_name, timestamp, dir_dataset
+        model_fields(TagRow),
+        str(CaseIdType.tag_commit),
+        repo_name,
+        timestamp,
+        dir_dataset,
     )
     r_file, release_writer = prepare_file(
-        model_fields(ReleaseRow), str(CaseIdType.release_commit), repo_name, timestamp, dir_dataset
+        model_fields(ReleaseRow),
+        str(CaseIdType.release_commit),
+        repo_name,
+        timestamp,
+        dir_dataset,
     )
 
     g = Github(auth=Auth.Token(os.getenv("git_token", "")))
@@ -68,7 +100,6 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                 break
             tag_counter()
             sha = tag.commit.sha
-            logger.info("tag %s", sha)
             tag_writer.writerow(TagRow.from_dict(tag))
             try:
                 release = repo.get_release(tag.name)
@@ -139,8 +170,8 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                         )
                     try:
                         pull_comments = pull.get_comments()
-                    except Exception as e:
-                        logger.exception(e)
+                    except Exception as exp:
+                        logger.exception(exp)
                         pull_comments = []
 
                     for pull_comment in pull_comments:
@@ -157,6 +188,7 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                                     pull_comment.created_at,
                                 )
                             )
+                    del pull_comments
 
                     for reviewer in pull.requested_reviewers:
                         user_writer.writerow(
@@ -178,8 +210,8 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                         )
                 try:
                     comments = commit.get_comments()
-                except Exception as e:
-                    logger.exception(e)
+                except Exception as exp:
+                    logger.exception(exp)
                     comments = []
 
                 for comment in comments:
@@ -192,6 +224,8 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                             comment.created_at,
                         )
                     )
+                del commit
+                del comments
 
         logger.info("Success extracted")
         status = 0
