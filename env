@@ -1,0 +1,6 @@
+export git_token=
+repos_file=
+number_to_extract=
+start_from=
+repo=git-process-analyzer
+author=CrashCumber

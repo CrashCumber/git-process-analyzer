@@ -1,9 +1,8 @@
 include .env
 
-.PHONY: all clean venv install
+.PHONY: all clean install format run run_d
 
-
-all: install test
+all: install
 
 clean:
 	find . -name "*.pyc" -exec rm {} \;
@@ -13,17 +12,14 @@ format:
 	black src/*
 	isort src/*
 
-venv:
-	python3.11 -m venv venv
-
 install:
-	echo "export git_token=\nepos_file=\nnumber_to_extract=\nstart_from=" >> .env
+	cat env >> .env
 	mkdir datasets
 	python3.11 -m venv venv
 	venv/bin/pip install -r requirements.txt
 
 run_d:
-	venv/bin/python src/main.py -r mux -a gorilla &
+	venv/bin/python src/main.py -r ${repo} -a ${author} -c 1 -t 0 &
 
 run:
-	venv/bin/python src/main.py -r mux -a gorilla -c 1 -t 0
+	venv/bin/python src/main.py -r ${repo} -a ${author} -c 1 -t 0
