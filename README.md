@@ -48,8 +48,8 @@ export git_token=your_token
 >>
 
 python main.py --repo git-process-analyzer --author CrashCumber --commits 100 --tags 5 --branch main --dir-dataset ./datasets
-``
-For more info about token [go here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+```
+For more info about token [go here.](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 
 #### License
 
