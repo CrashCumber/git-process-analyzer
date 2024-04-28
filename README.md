@@ -35,22 +35,24 @@ This command will extract 100 commits and 5 tags from the "git-process-analyzer"
 
 #### Install
 
+#### Clone and make
 ```bash
 git clone https://github.com/CrashCumber/git-process-analyzer.git
 cd git-process-analyzer
 make install
-
+```
+#### Add github token
+```
 vi .env
 >>
 ...
 export git_token=your_token
 ...
 >>
-
+source .env
+```
+#### Run
+```
 python main.py --repo git-process-analyzer --author CrashCumber --commits 100 --tags 5 --branch main --dir-dataset ./datasets
 ```
 For more info about token [go here.](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
-
-#### License
-
-#### Author
