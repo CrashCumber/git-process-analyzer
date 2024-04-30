@@ -27,7 +27,7 @@ def prepare_file(
     dir_dataset.mkdir(exist_ok=True, parents=True)
 
     file_path = dir_dataset / f"{filename}.csv"
-    logger.info("Write dataset in file %s", file_path)
+    logger.warn("Write dataset in file %s", file_path)
     file_dataset = open(file_path, "w", newline="")
     writer = DataSetWriter(file_dataset, fieldnames=fieldnames)
     writer.writeheader()

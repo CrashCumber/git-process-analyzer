@@ -49,7 +49,7 @@ parser.add_argument("--dir-dataset", "-dp", dest="dir_dataset", default=None, he
 
 if __name__ == "__main__":
     args = parser.parse_args()
-    logger.info("Start extract from %s", args)
+    logger.warn("Start extract from %s", args)
     repo_name = args.author + "/" + args.repo
     status = extract_commits(
         repo_name,
@@ -59,5 +59,5 @@ if __name__ == "__main__":
         tag_cnt=args.tags,
         dir_dataset=args.dir_dataset,
     )
-    logger.info("Finish extract from %s", args)
+    logger.warn("Finish extract from %s", args)
     os._exit(status)

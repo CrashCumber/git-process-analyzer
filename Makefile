@@ -19,7 +19,7 @@ install:
 	venv/bin/pip install -r requirements.txt
 
 run_d:
-	venv/bin/python src/main.py -r ${repo} -a ${author} -c 1 -t 0 &
+	venv/bin/python src/main.py -r ${repo} -a ${author} &
 
 run:
-	venv/bin/python src/main.py -r ${repo} -a ${author} -c 1 -t 0
+	venv/bin/python src/main.py -r ${repo} -a ${author}

@@ -2,7 +2,7 @@
 
 This script facilitates the extraction of datasets for commit models from GitHub repositories. By specifying the repository name, author, and optional parameters such as the number of commits or tags, users can customize the extraction process to suit their needs.
 
-#### Usage
+### Usage
 
 ```bash
 python main.py [-h] --repo REPO --author AUTHOR [--commits COMMITS]
@@ -28,12 +28,12 @@ python main.py --repo git-process-analyzer --author CrashCumber --commits 100 --
 
 This command will extract 100 commits and 5 tags from the "git-process-analyzer" repository owned by "CrashCumber", specifically from the "main" branch, and save the dataset in the "./datasets" folder.
 
+### Install
+
 #### Dependencies
 
 - `python 3.11`
 - `make`
-
-#### Install
 
 #### Clone and make
 ```bash

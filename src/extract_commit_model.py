@@ -104,7 +104,7 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
             try:
                 release = repo.get_release(tag.name)
             except UnknownObjectException:
-                logger.info("no release for tag %s", tag.name)
+                logger.warn("no release for tag %s", tag.name)
             else:
                 release_writer.writerow(ReleaseRow.from_dict(sha, release))
                 user_writer.writerow(
@@ -227,7 +227,7 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                 del commit
                 del comments
 
-        logger.info("Success extracted")
+        logger.warn("Success extracted")
         status = 0
     except Exception as e:
         status = 1

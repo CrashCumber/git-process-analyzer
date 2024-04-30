@@ -1,7 +1,7 @@
 import logging
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.WARNING,
     filename="extraction.log",
     format="%(asctime)s %(levelname)s %(message)s",
 )
