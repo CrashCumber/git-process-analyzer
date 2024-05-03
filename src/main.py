@@ -59,5 +59,5 @@ if __name__ == "__main__":
         tag_cnt=args.tags,
         dir_dataset=args.dir_dataset,
     )
-    logger.warn("Finish extract from %s", args)
+    logger.warn("Finish extract from status=%d: %s", status, args)
     os._exit(status)
