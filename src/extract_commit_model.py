@@ -124,7 +124,12 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
 
                 logger.info("commit %s:%s", branch.name, sha)
                 commit_counter()
-                commit_writer.writerow(CommitRow.from_dict(commit, branch.name))
+
+                row = CommitRow.from_dict(commit, branch.name)
+                if not row:
+                    continue
+                commit_writer.writerow(row)
+
                 if commit.author:
                     user_writer.writerow(
                         UserRow.from_dict(

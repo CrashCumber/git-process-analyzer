@@ -58,43 +58,46 @@ class CommitRow:
 
     @classmethod
     def from_dict(cls, commit: Commit, branch: str):
-        row = {
-            "sha": commit.sha,
-            "message": "",
-            "create_date": "",
-            "commit_date": "",
-            "author_id": -1,
-            "committer_id": -1,
-            "stats_additions": -1,
-            "stats_deletions": -1,
-            "stats_total": -1,
-            "tree_sha": commit.commit.tree.sha,
-            "tree_url": commit.commit.tree.url,
-            "comments_url": commit.comments_url,
-            "url": commit.url,
-            "html_url": commit.html_url,
-            "branch": branch,
-        }
-        if commit.author:
-            row["author_id"] = commit.author.id
-        if commit.committer:
-            row["committer_id"] = commit.committer.id
+        try:
+            row = {
+                "sha": commit.sha,
+                "message": "",
+                "create_date": "",
+                "commit_date": "",
+                "author_id": -1,
+                "committer_id": -1,
+                "stats_additions": -1,
+                "stats_deletions": -1,
+                "stats_total": -1,
+                "tree_sha": commit.commit.tree.sha,
+                "tree_url": commit.commit.tree.url,
+                "comments_url": commit.comments_url,
+                "url": commit.url,
+                "html_url": commit.html_url,
+                "branch": branch,
+            }
+            if commit.author:
+                row["author_id"] = commit.author.id
+            if commit.committer:
+                row["committer_id"] = commit.committer.id
 
-        if commit.commit.committer:
-            row["commit_date"] = commit.commit.committer.date
-        if commit.commit.author:
-            row["create_date"] = commit.commit.author.date
-        if commit.commit.message:
-            row["message"] = commit.commit.message
-        if commit.stats:
-            row.update(
-                {
-                    "stats_additions": commit.stats.additions,
-                    "stats_deletions": commit.stats.deletions,
-                    "stats_total": commit.stats.total,
-                }
-            )
-
+            if commit.commit.committer:
+                row["commit_date"] = commit.commit.committer.date
+            if commit.commit.author:
+                row["create_date"] = commit.commit.author.date
+            if commit.commit.message:
+                row["message"] = commit.commit.message
+            if commit.stats:
+                row.update(
+                    {
+                        "stats_additions": commit.stats.additions,
+                        "stats_deletions": commit.stats.deletions,
+                        "stats_total": commit.stats.total,
+                    }
+                )
+        except Exception as e:
+            logger.exception(e)
+            return None
         return cls(**row)
 
 
@@ -295,18 +298,22 @@ class ReleaseRow:
 
     @classmethod
     def from_dict(cls, commit_sha, release: GitRelease):
-        row = {
-            "commit_sha": commit_sha,
-            "id": release.id,
-            "tag_name": release.tag_name,
-            "created_at": release.created_at,
-            "published_at": release.published_at,
-            "title": release.title,
-            "prerelease": release.prerelease,
-            "draft": release.draft,
-            "target_commitish": release.target_commitish,
-            "author_name": release.author.name,
-            "author_id": release.author.id,
-            "body": release.body,
-        }
+        try:
+            row = {
+                "commit_sha": commit_sha,
+                "id": release.id,
+                "tag_name": release.tag_name,
+                "created_at": release.created_at,
+                "published_at": release.published_at,
+                "title": release.title,
+                "prerelease": release.prerelease,
+                "draft": release.draft,
+                "target_commitish": release.target_commitish,
+                "author_name": release.author.name,
+                "author_id": release.author.id,
+                "body": release.body,
+            }
+        except Exception as e:
+            logger.exception(e)
+            return None
         return cls(**row)
