@@ -6,5 +6,5 @@ do
     start_extract=$(date +%s)
     venv/bin/python3 src/main.py -r $repo_name -a $username &> /dev/null;
     status=$?
-    echo "$start_extract,$(date +%s),$rank,$repo_name,$status" >> status.csv;
+    echo "$start_extract,$(date +%s),$rank,$repo_name,$username,$status" >> status.csv;
 done
