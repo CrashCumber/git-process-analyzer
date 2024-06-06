@@ -15,7 +15,6 @@ datas = sorted(
     ]
 )
 
-
 report_path = "report.md"
 report_f = open(report_path, mode="w")
 report_f.write(f"### Reference date: {TARGET}\n\n")
@@ -27,7 +26,6 @@ for data in datas:
     ds = requests.get(f"https://raw.githubusercontent.com/EvanLi/Github-Ranking/master/Data/github-ranking-{data}.csv")
     with open(data_path, mode="w") as f:
         f.write(ds.content.decode())
-
 
 df_raw = pd.read_csv(f"datas/{TARGET}")
 df_target = df_raw.loc[df_raw["item"] == "Go"]
@@ -50,7 +48,12 @@ for data in datas:
 
 data = {"Date": datas, "Matching number": res, "Added number": res_added_repos, "Removed number": res_removed_repos}
 df = pd.DataFrame(data)
+
 report_f.write(df.to_markdown())
+table = open("report.xls", mode="wb")
+df.to_excel(table)
+table.close()
+
 df["Date"] = pd.to_datetime(df["Date"])
 
 plt.figure(figsize=(10, 6))
