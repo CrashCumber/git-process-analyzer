@@ -21,7 +21,9 @@ from utils import Counter, model_fields
 from writer import prepare_file
 
 
-def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=None, tag_cnt=None, dir_dataset=None):
+def extract_commits(
+    repo_name: str, all_branch=True, branch=None, commits_cnt=None, tag_cnt=None, dir_dataset=None
+):
     timestamp = str(int(time.time()))
     commit_file, commit_writer = prepare_file(
         model_fields(CommitRow),
@@ -182,7 +184,9 @@ def extract_commits(repo_name: str, all_branch=True, branch=None, commits_cnt=No
                     for pull_comment in pull_comments:
                         if pull_comment.commit_id != sha:
                             continue
-                        prcomment_writer.writerow(PullRequestCommentRow.from_dict(sha, pull_comment))
+                        prcomment_writer.writerow(
+                            PullRequestCommentRow.from_dict(sha, pull_comment)
+                        )
 
                         if pull_comment.user:
                             user_writer.writerow(
